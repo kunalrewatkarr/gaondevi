@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { navigation } from "@/data/site";
+import { mobileNavigation, navigation } from "@/data/site";
 import { Logo } from "@/components/ui/Logo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
@@ -22,7 +22,11 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = navigation.map((n) => n.href.replace("#", ""));
+    const sectionIds = [
+      ...new Set(
+        [...navigation, ...mobileNavigation].map((n) => n.href.replace("#", ""))
+      ),
+    ];
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
@@ -43,6 +47,14 @@ export function Header() {
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1280) setMenuOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
@@ -91,19 +103,24 @@ export function Header() {
   const onDark = !scrolled && !menuOpen;
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-[3px] z-50 transition-all duration-300",
-        scrolled || menuOpen
-          ? "bg-ivory/95 py-2 shadow-md shadow-ink/10 backdrop-blur-xl"
-          : "bg-transparent py-3"
-      )}
-    >
+    <>
+    <header className="fixed inset-x-0 top-[3px] z-[80]">
+      <div
+        className={cn(
+          "transition-all duration-300",
+          scrolled || menuOpen
+            ? "bg-ivory/95 py-2 shadow-md shadow-ink/10 backdrop-blur-xl"
+            : "bg-transparent py-3"
+        )}
+      >
       <div className="container-main flex items-center justify-between gap-4">
         <Link
           href="#home"
           className="group rounded-lg focus-ring"
-          onClick={() => setMenuOpen(false)}
+          onClick={() => {
+            document.body.style.overflow = "";
+            setMenuOpen(false);
+          }}
         >
           <Logo
             size="sm"
@@ -117,7 +134,7 @@ export function Header() {
               "[&_p:last-child]:text-xs",
               onDark
                 ? "[&_p:last-child]:text-rose-gold"
-                : "[&_p:last-child]:text-vermillion"
+                : "[&_p:last-child]:text-gold-ink"
             )}
           />
         </Link>
@@ -135,18 +152,18 @@ export function Header() {
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
                   "relative rounded-full px-2.5 py-2 text-sm font-medium transition-all duration-300 focus-ring xl:px-3",
-                  isActive && !onDark && "bg-vermillion/10 text-vermillion",
-                  isActive && onDark && "bg-cream/15 text-cream",
+                  isActive && !onDark && "bg-gold/15 text-gold-ink",
+                  isActive && onDark && "bg-gold/20 text-gold-bright",
                   !isActive &&
                     (onDark
                       ? "text-cream/75 hover:bg-cream/10 hover:text-cream"
-                      : "text-ink-muted hover:bg-vermillion/10 hover:text-vermillion")
+                      : "text-ink-muted hover:bg-gold/10 hover:text-gold-ink")
                 )}
               >
                 {item.label}
                 {isActive && (
                   <span
-                    className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-vermillion to-amber"
+                    className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-gold to-gold-bright"
                     aria-hidden="true"
                   />
                 )}
@@ -175,45 +192,54 @@ export function Header() {
           </button>
         </div>
       </div>
+      </div>
+    </header>
 
       <div
         id={menuId}
         ref={menuPanelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="मेनू"
+        inert={!menuOpen}
         className={cn(
-          "fixed inset-0 z-40 bg-ivory/98 backdrop-blur-lg transition-all duration-300 xl:hidden",
+          "fixed inset-0 z-[70] overflow-x-hidden bg-ivory xl:hidden",
           menuOpen
             ? "visible opacity-100"
             : "invisible pointer-events-none opacity-0"
         )}
       >
-        <div className="flex justify-center pt-20 sm:pt-24">
-          <Logo size="md" variant="dark" />
-        </div>
         <nav
-          className="flex max-h-[calc(100dvh-7.5rem)] flex-col items-center justify-start gap-1 overflow-y-auto overscroll-contain px-6 py-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:justify-center sm:px-8 sm:pt-6"
+          className="h-full overflow-y-auto overscroll-contain pt-[4.75rem] pb-[max(1.25rem,env(safe-area-inset-bottom))]"
           aria-label="मोबाइल नेव्हिगेशन"
         >
-          {navigation.map((item) => {
-            const isActive = activeSection === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "true" : undefined}
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  "w-full max-w-xs rounded-2xl px-5 py-3.5 text-center font-display text-xl leading-snug transition-colors focus-ring sm:text-2xl",
-                  isActive
-                    ? "bg-vermillion/10 text-vermillion"
-                    : "text-ink hover:bg-vermillion/10 hover:text-vermillion"
-                )}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          <ul className="flex flex-col">
+            {mobileNavigation.map((item) => {
+              const isActive = activeSection === item.href;
+              return (
+                <li key={item.href} className="border-b border-ink/10">
+                  <Link
+                    href={item.href}
+                    aria-current={isActive ? "true" : undefined}
+                    onClick={() => {
+                      document.body.style.overflow = "";
+                      setMenuOpen(false);
+                    }}
+                    className={cn(
+                      "flex w-full items-center px-5 py-4 text-base leading-snug transition-colors focus-ring sm:px-8 sm:py-[1.15rem] sm:text-lg",
+                      isActive
+                        ? "bg-gold/15 text-gold-ink"
+                        : "text-ink hover:bg-gold/10 hover:text-gold-ink"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
       </div>
-    </header>
+    </>
   );
 }

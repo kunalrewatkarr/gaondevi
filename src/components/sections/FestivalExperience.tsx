@@ -11,7 +11,20 @@ const highlights = [
 ];
 
 export function FestivalExperience() {
-  const photos = [mandapImages.primary, mandapImages.secondary, mandapImages.tertiary];
+  const photos = [
+    {
+      src: mandapImages.primary,
+      alt: "उत्सवाचा मंडप — नवयुवक दुर्गा उत्सव मंडळ",
+    },
+    {
+      src: mandapImages.secondary,
+      alt: "मंडपाची सजावट — नवयुवक दुर्गा उत्सव मंडळ",
+    },
+    {
+      src: mandapImages.tertiary,
+      alt: "नवरात्र उत्सवाचे दृश्य — नवयुवक दुर्गा उत्सव मंडळ",
+    },
+  ];
 
   return (
     <section id="experience" className="section-padding overflow-hidden bg-night">
@@ -24,20 +37,20 @@ export function FestivalExperience() {
         />
 
         <div className="mb-12 grid gap-4 md:grid-cols-2">
-          {photos.map((src, i) => (
+          {photos.map((photo, i) => (
             <FadeIn
-              key={src}
+              key={`${photo.src}-${i}`}
               delay={i * 90}
               className={i === 0 ? "md:col-span-2" : undefined}
             >
               <div
-                className={`relative overflow-hidden rounded-3xl ${
+                className={`relative overflow-hidden rounded-3xl shadow-lg shadow-night/40 ring-1 ring-gold/35 ${
                   i === 0 ? "aspect-[16/9]" : "aspect-[16/10]"
                 }`}
               >
                 <Image
-                  src={src}
-                  alt={`उत्सवाचे दृश्य ${i + 1}`}
+                  src={photo.src}
+                  alt={photo.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy"

@@ -21,10 +21,7 @@ export function SocialWork() {
                 lift
                 className="flex h-full gap-4 p-6"
               >
-                <span
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-vermillion text-2xl text-cream"
-                  aria-hidden="true"
-                >
+                <span className="icon-badge icon-badge-lg" aria-hidden="true">
                   {item.icon}
                 </span>
                 <div>

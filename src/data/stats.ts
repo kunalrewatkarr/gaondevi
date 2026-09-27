@@ -1,7 +1,7 @@
 import { siteConfig } from "./site";
 
-const currentYear = new Date().getFullYear();
-const yearsOfTradition = currentYear - siteConfig.foundedYear;
+/** Years since स्थापना 1980, anchored to the 2026 festival season (~45+). */
+const yearsOfTradition = Math.max(45, 2026 - siteConfig.foundedYear);
 
 export interface Stat {
   /** Final number the counter animates to */
@@ -21,7 +21,12 @@ export const stats: Stat[] = [
     numerals: "latin",
   },
   { target: 9, label: "उत्सवाचे दिवस", numerals: "devanagari" },
-  { target: 10, suffix: "+", label: "वार्षिक कार्यक्रम", numerals: "devanagari" },
+  {
+    target: 10,
+    suffix: "+",
+    label: "वार्षिक कार्यक्रम",
+    numerals: "latin",
+  },
   {
     target: 100,
     suffix: "+",

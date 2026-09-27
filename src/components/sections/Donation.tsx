@@ -45,7 +45,7 @@ export function Donation() {
       <div className="container-main">
         <FadeIn>
           <div className="mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-gold/30 bg-gradient-to-br from-vermillion via-maroon to-wine px-5 py-9 text-center text-cream shadow-xl shadow-vermillion/25 sm:px-10 sm:py-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-saffron">
+            <p className="text-xs font-semibold text-saffron">
               योगदान
             </p>
             <h2 className="mt-4 font-display text-2xl leading-snug sm:text-3xl md:text-4xl">
@@ -58,9 +58,8 @@ export function Donation() {
               <Button
                 type="button"
                 size="lg"
-                variant="secondary"
                 onClick={() => setOpen(true)}
-                className="w-full bg-cream text-vermillion hover:bg-saffron hover:text-night sm:w-auto"
+                className="min-h-14 w-full px-10 text-xl shadow-[0_10px_32px_-8px_rgba(212,165,55,0.85)] sm:min-w-[16rem] sm:w-auto"
               >
                 {donationConfig.ctaLabel}
               </Button>
@@ -84,7 +83,7 @@ export function Donation() {
         <div className="rounded-[1.75rem] bg-card p-5 shadow-2xl ring-1 ring-ink/10 sm:p-7">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-xs font-semibold tracking-[0.22em] text-vermillion">
+              <p className="text-xs font-semibold text-gold-ink">
                 योगदान
               </p>
               <h3 id={titleId} className="mt-2 font-display text-xl leading-snug text-ink sm:text-2xl">
@@ -137,10 +136,7 @@ export function Donation() {
                       {copied ? "कॉपी झाले" : "UPI ID कॉपी करा"}
                     </Button>
                     {upiLink ? (
-                      <a
-                        href={upiLink}
-                        className="inline-flex min-h-10 w-full items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-night-soft focus-ring sm:w-auto"
-                      >
+                      <a href={upiLink} className="btn-pill btn-pill-gold focus-ring sm:w-auto">
                         UPI द्वारे योगदान द्या
                       </a>
                     ) : null}
@@ -149,23 +145,23 @@ export function Donation() {
               ) : null}
             </div>
           ) : (
-            <div className="mt-6 space-y-3 rounded-2xl bg-ivory p-4 ring-1 ring-ink/8">
+            <div className="mt-6 space-y-3 rounded-3xl bg-ivory p-4 ring-1 ring-gold/35">
               <p className="text-sm text-ink-muted">
-                योगदानासाठी मंडळाशी संपर्क साधा:
+                UPI / QR तपशील लवकरच. योगदानासाठी मंडळाशी संपर्क साधा:
               </p>
               <a
                 href={`tel:${donationConfig.phone}`}
-                className="block font-display text-2xl text-vermillion focus-ring"
+                className="btn-pill btn-pill-call focus-ring"
               >
-                {donationConfig.phone}
+                कॉल करा · {donationConfig.phone}
               </a>
               <a
                 href={`https://wa.me/91${donationConfig.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center text-sm font-medium text-terracotta hover:underline focus-ring"
+                className="btn-pill btn-pill-wa focus-ring"
               >
-                WhatsApp करा →
+                WhatsApp करा
               </a>
             </div>
           )}

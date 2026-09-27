@@ -1,31 +1,35 @@
 @import "tailwindcss";
 
 /*
-  Festival brand — Royal Magenta Rose + Saffron (Navratri / garba cultural)
-  Clearly different from the old pale vermillion-on-near-white look.
-  Primary: magenta rose · Accent: saffron gold · Surfaces: warm sand (never white)
-  Dark bands: deep plum night
+  Festival brand — temple maroon, antique gold, ivory.
+  Primary: deep maroon · Accent: saffron gold · Surfaces: warm ivory
+  Dark bands: maroon night
 */
 :root {
-  /* Brand */
-  --ink: #1a1020;
-  --ink-muted: #52405a;
-  --ivory: #ebe0d0;
-  --paper: #dfd0b8;
-  --card: #f6efe4;
-  --maroon: #6b1040;
-  --wine: #3f0a28;
-  --vermillion: #9d174d;
-  --vermillion-dark: #7a123c;
-  --terracotta: #c2410c;
-  --saffron: #e8910f;
-  --amber: #f0b429;
-  --gold: #c9890a;
-  --rose-gold: #e8b84a;
-  --cream: #fff8eb;
-  --night: #120816;
-  --night-soft: #2a1528;
-  --glow: rgba(232, 145, 15, 0.38);
+  /* Brand — temple maroon, mustard gold, warm ivory */
+  --ink: #1c1410;
+  --ink-muted: #5a4638;
+  --ivory: #fbf3e7;
+  --paper: #f7eedd;
+  --card: #fffaf3;
+  --maroon: #7a1f2b;
+  --wine: #4a1520;
+  --vermillion: #8c1d2e;
+  --vermillion-dark: #6b1524;
+  --terracotta: #8c4a2f;
+  --saffron: #d4a537;
+  --amber: #c9962c;
+  --gold: #c9962c;
+  --gold-bright: #d4a537;
+  /* Darker gold for small text on ivory — keeps WCAG AA */
+  --gold-ink: #7a5410;
+  /* Text on gold fills — stays dark in both themes */
+  --on-gold: #1c1410;
+  --rose-gold: #e4c98a;
+  --cream: #fff8ee;
+  --night: #140c0e;
+  --night-soft: #2a181c;
+  --glow: rgba(201, 150, 44, 0.42);
   --whatsapp: #25d366;
 
   /* Semantic */
@@ -55,14 +59,14 @@
   --radius-pill: 9999px;
 }
 
-/* Dark theme — festive night surfaces, same maroon/saffron brand */
+/* Dark theme — warm maroon night, same gold brand */
 html[data-theme="dark"] {
   color-scheme: dark;
-  --ink: #f7efe6;
-  --ink-muted: #d0bdc6;
-  --ivory: #120816;
-  --paper: #1a101c;
-  --card: #2c1d30;
+  --ink: #f8f1e7;
+  --ink-muted: #d9cbba;
+  --ivory: #140c0e;
+  --paper: #1c1214;
+  --card: #2a1a1e;
   --background: var(--ivory);
   --foreground: var(--ink);
   --surface: var(--paper);
@@ -72,7 +76,11 @@ html[data-theme="dark"] {
   --text-primary: var(--ink);
   --text-secondary: var(--ink-muted);
   --text-muted: color-mix(in srgb, var(--ink-muted) 88%, transparent);
-  --terracotta: #ea580c;
+  --terracotta: #c47a52;
+  --saffron: #e4c56a;
+  --gold: #d4a537;
+  --gold-bright: #e8c97a;
+  --gold-ink: #e8c97a;
 }
 
 html[data-theme="light"] {
@@ -93,6 +101,9 @@ html[data-theme="light"] {
   --color-saffron: var(--saffron);
   --color-amber: var(--amber);
   --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-ink: var(--gold-ink);
+  --color-on-gold: var(--on-gold);
   --color-rose-gold: var(--rose-gold);
   --color-cream: var(--cream);
   --color-night: var(--night);
@@ -114,6 +125,13 @@ html[data-theme="light"] {
 html {
   scroll-behavior: smooth;
   background: var(--ivory);
+}
+
+section[id],
+#aarti,
+#mahaprasad,
+#visarjan {
+  scroll-margin-top: 5.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -178,11 +196,11 @@ body {
 .section-surface-warm {
   position: relative;
   background:
-    radial-gradient(ellipse 72% 48% at 0% 0%, rgba(157, 23, 77, 0.32), transparent 62%),
-    radial-gradient(ellipse 58% 42% at 100% 8%, rgba(232, 145, 15, 0.42), transparent 58%),
-    radial-gradient(ellipse 48% 36% at 88% 100%, rgba(201, 137, 10, 0.28), transparent 55%),
-    radial-gradient(ellipse 40% 32% at 8% 92%, rgba(194, 65, 12, 0.22), transparent 55%),
-    linear-gradient(155deg, #f8dcb8 0%, #f3d0b0 32%, #f6e4cc 68%, #fbead4 100%);
+    radial-gradient(ellipse 72% 48% at 0% 0%, rgba(124, 36, 51, 0.22), transparent 62%),
+    radial-gradient(ellipse 58% 42% at 100% 8%, rgba(196, 132, 42, 0.28), transparent 58%),
+    radial-gradient(ellipse 48% 36% at 88% 100%, rgba(201, 163, 106, 0.22), transparent 55%),
+    radial-gradient(ellipse 40% 32% at 8% 92%, rgba(140, 74, 47, 0.14), transparent 55%),
+    linear-gradient(155deg, #f8f1e6 0%, #f3e6d4 32%, #f7efe3 68%, #fbf6ee 100%);
 }
 
 .section-surface-warm::before {
@@ -190,7 +208,7 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(107, 16, 64, 0.16) 1.1px, transparent 1.2px);
+  background-image: radial-gradient(circle, rgba(107, 29, 44, 0.14) 1.1px, transparent 1.2px);
   background-size: 26px 26px;
   mask-image: radial-gradient(ellipse at center, black 15%, transparent 78%);
   opacity: 0.55;
@@ -198,27 +216,43 @@ body {
 
 .events-surface {
   background:
-    radial-gradient(720px 420px at 12% 8%, rgba(157, 23, 77, 0.12), transparent 55%),
-    radial-gradient(640px 380px at 92% 18%, rgba(232, 145, 15, 0.18), transparent 50%),
-    radial-gradient(520px 360px at 50% 100%, rgba(194, 65, 12, 0.08), transparent 55%),
-    linear-gradient(180deg, #f3e7d4 0%, #ebe0d0 42%, #f7efe3 100%);
+    radial-gradient(720px 420px at 12% 8%, rgba(124, 36, 51, 0.1), transparent 55%),
+    radial-gradient(640px 380px at 92% 18%, rgba(196, 132, 42, 0.14), transparent 50%),
+    radial-gradient(520px 360px at 50% 100%, rgba(140, 74, 47, 0.08), transparent 55%),
+    linear-gradient(180deg, #f3e7d8 0%, #f6f0e6 42%, #fbf6ee 100%);
 }
 
 html[data-theme="dark"] .events-surface {
   background:
-    radial-gradient(720px 420px at 12% 8%, rgba(157, 23, 77, 0.28), transparent 55%),
-    radial-gradient(640px 380px at 92% 18%, rgba(232, 145, 15, 0.16), transparent 50%),
-    radial-gradient(520px 360px at 50% 100%, rgba(194, 65, 12, 0.12), transparent 55%),
-    linear-gradient(180deg, #1a101c 0%, #120816 50%, #1c1220 100%);
+    radial-gradient(720px 420px at 12% 8%, rgba(124, 36, 51, 0.32), transparent 55%),
+    radial-gradient(640px 380px at 92% 18%, rgba(196, 132, 42, 0.16), transparent 50%),
+    radial-gradient(520px 360px at 50% 100%, rgba(140, 74, 47, 0.14), transparent 55%),
+    linear-gradient(180deg, #1c1214 0%, #140c0e 50%, #1a1012 100%);
+}
+
+.about-surface {
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(140, 29, 46, 0.22), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 100% 8%, rgba(201, 150, 44, 0.34), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(122, 31, 43, 0.16), transparent 50%),
+    linear-gradient(165deg, #f6d7c4 0%, #f8e6cf 38%, #fbf1e2 100%);
+}
+
+html[data-theme="dark"] .about-surface {
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(140, 29, 46, 0.55), transparent 62%),
+    radial-gradient(ellipse 70% 45% at 100% 8%, rgba(212, 165, 55, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(122, 31, 43, 0.35), transparent 52%),
+    linear-gradient(165deg, #2a1418 0%, #140c0e 46%, #1a1014 100%);
 }
 
 html[data-theme="dark"] .section-surface-warm {
   background:
-    radial-gradient(ellipse 72% 48% at 0% 0%, rgba(157, 23, 77, 0.5), transparent 62%),
-    radial-gradient(ellipse 58% 42% at 100% 8%, rgba(232, 145, 15, 0.28), transparent 58%),
-    radial-gradient(ellipse 48% 36% at 88% 100%, rgba(201, 137, 10, 0.2), transparent 55%),
-    radial-gradient(ellipse 40% 32% at 8% 92%, rgba(194, 65, 12, 0.22), transparent 55%),
-    linear-gradient(155deg, #2a1428 0%, #160c18 48%, #1c1016 100%);
+    radial-gradient(ellipse 72% 48% at 0% 0%, rgba(124, 36, 51, 0.48), transparent 62%),
+    radial-gradient(ellipse 58% 42% at 100% 8%, rgba(196, 132, 42, 0.22), transparent 58%),
+    radial-gradient(ellipse 48% 36% at 88% 100%, rgba(201, 163, 106, 0.16), transparent 55%),
+    radial-gradient(ellipse 40% 32% at 8% 92%, rgba(140, 74, 47, 0.18), transparent 55%),
+    linear-gradient(155deg, #241418 0%, #140c0e 48%, #1a1012 100%);
 }
 
 html[data-theme="dark"] .section-surface-warm::before {
@@ -245,7 +279,7 @@ html[data-theme="dark"] .grain {
 }
 
 .field-input {
-  @apply w-full rounded-2xl border border-ink/12 bg-card px-4 py-3 text-base text-ink placeholder:text-ink-muted/55 focus:border-vermillion/45 focus:outline-none focus:ring-2 focus:ring-vermillion/25;
+  @apply w-full rounded-2xl border border-gold/50 bg-ivory px-4 py-3 text-base text-ink shadow-sm shadow-ink/5 placeholder:text-ink-muted/55 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/45;
 }
 
 .focus-ring {
@@ -294,16 +328,16 @@ html[data-theme="dark"] .grain {
 
 .mesh-dark {
   background:
-    radial-gradient(900px 500px at 12% 18%, rgba(157, 23, 77, 0.55), transparent 55%),
-    radial-gradient(700px 480px at 88% 8%, rgba(232, 145, 15, 0.28), transparent 50%),
-    radial-gradient(600px 400px at 72% 88%, rgba(107, 16, 64, 0.4), transparent 50%),
+    radial-gradient(900px 500px at 12% 18%, rgba(124, 36, 51, 0.5), transparent 55%),
+    radial-gradient(700px 480px at 88% 8%, rgba(196, 132, 42, 0.22), transparent 50%),
+    radial-gradient(600px 400px at 72% 88%, rgba(107, 29, 44, 0.42), transparent 50%),
     var(--night);
 }
 
 .mesh-warm {
   background:
-    radial-gradient(680px 440px at 8% 0%, rgba(157, 23, 77, 0.14), transparent 55%),
-    radial-gradient(560px 380px at 100% 100%, rgba(232, 145, 15, 0.16), transparent 52%),
+    radial-gradient(680px 440px at 8% 0%, rgba(124, 36, 51, 0.1), transparent 55%),
+    radial-gradient(560px 380px at 100% 100%, rgba(196, 132, 42, 0.12), transparent 52%),
     var(--ivory);
 }
 
@@ -450,7 +484,7 @@ html[data-theme="dark"] .grain {
 .card-lift:hover {
   transform: translateY(-6px);
   box-shadow:
-    0 24px 48px -20px rgba(26, 16, 32, 0.2),
+    0 24px 48px -20px rgba(26, 18, 16, 0.18),
     0 0 0 1px color-mix(in srgb, var(--saffron) 28%, transparent);
 }
 
@@ -458,12 +492,77 @@ html[data-theme="dark"] .grain {
   background-size: 200% auto;
   background-image: linear-gradient(
     90deg,
-    var(--vermillion) 0%,
-    var(--terracotta) 28%,
-    var(--vermillion) 50%,
-    var(--saffron) 72%,
-    var(--vermillion) 100%
+    var(--gold) 0%,
+    var(--gold-bright) 28%,
+    #e8c56a 50%,
+    var(--gold) 72%,
+    var(--gold-bright) 100%
   );
+  color: var(--on-gold);
+}
+
+.icon-badge {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid color-mix(in srgb, var(--gold) 80%, transparent);
+  background: color-mix(in srgb, var(--gold) 14%, var(--card));
+  font-size: 1.25rem;
+  line-height: 1;
+  box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--gold) 80%, transparent);
+}
+
+.icon-badge-lg {
+  height: 3.5rem;
+  width: 3.5rem;
+  font-size: 1.5rem;
+}
+
+.btn-pill {
+  display: inline-flex;
+  min-height: 3rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+  box-shadow: 0 10px 22px -14px rgba(28, 20, 16, 0.55);
+}
+
+.btn-pill:hover {
+  transform: scale(1.03);
+}
+
+.btn-pill:active {
+  transform: scale(0.98);
+}
+
+.btn-pill-call {
+  background: linear-gradient(160deg, var(--vermillion), var(--maroon));
+  color: var(--cream);
+}
+
+.btn-pill-wa {
+  background: var(--whatsapp);
+  color: #052e16;
+}
+
+.btn-pill-gold {
+  background: linear-gradient(160deg, var(--gold-bright), var(--gold));
+  color: var(--on-gold);
+  box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--gold) 80%, transparent);
 }
 
 .btn-shimmer:hover {

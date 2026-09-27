@@ -185,8 +185,8 @@ export function GalleryGrid({ images }: GalleryGridProps) {
               className={cn(
                 "min-h-10 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 focus-ring-dark",
                 isActive
-                  ? "bg-gradient-to-r from-vermillion to-terracotta text-cream shadow-md"
-                  : "bg-cream/10 text-cream/80 hover:bg-cream/20"
+                  ? "bg-gradient-to-r from-gold to-gold-bright text-on-gold shadow-md shadow-gold/30"
+                  : "border border-gold/45 bg-transparent text-cream/75 hover:border-gold hover:text-cream"
               )}
             >
               {cat}
@@ -211,17 +211,17 @@ export function GalleryGrid({ images }: GalleryGridProps) {
             key={image.id}
             type="button"
             onClick={() => setLightboxIndex(filtered.indexOf(image))}
-            className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-3xl focus-ring-dark"
+            className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-3xl shadow-md shadow-night/30 focus-ring-dark"
             aria-label={`${image.alt} — मोठ्या आकारात पहा`}
           >
-            <div className="relative overflow-hidden rounded-3xl ring-1 ring-cream/10">
+            <div className="relative overflow-hidden rounded-3xl ring-1 ring-gold/30">
               <Image
                 src={image.src}
                 alt={image.alt}
                 width={800}
                 height={600}
                 loading="lazy"
-                className="w-full object-cover transition-transform duration-700 group-hover:scale-105 group-focus-visible:scale-105"
+                className="w-full object-cover transition-transform duration-500 group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
               <div className="absolute inset-0 flex items-end bg-gradient-to-t from-night/90 via-night/25 to-transparent opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
                 <div className="w-full p-4">

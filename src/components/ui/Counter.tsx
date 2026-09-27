@@ -22,53 +22,79 @@ export function Counter({
   className,
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(target);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || hasAnimated.current) return;
-        hasAnimated.current = true;
-        observer.disconnect();
+    let raf = 0;
+    let safety = 0;
 
-        const prefersReduced = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
+    const finish = () => setDisplay(target);
 
-        if (prefersReduced) {
-          setDisplay(target);
+    const animate = () => {
+      if (hasAnimated.current) return;
+      hasAnimated.current = true;
+
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReduced || target <= 0) {
+        finish();
+        return;
+      }
+
+      const start = performance.now() + delay;
+
+      const tick = (now: number) => {
+        if (now < start) {
+          raf = requestAnimationFrame(tick);
           return;
         }
 
-        const start = performance.now() + delay;
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setDisplay(progress >= 1 ? target : Math.round(eased * target));
 
-        const tick = (now: number) => {
-          if (now < start) {
-            requestAnimationFrame(tick);
-            return;
-          }
+        if (progress < 1) raf = requestAnimationFrame(tick);
+      };
 
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setDisplay(Math.round(eased * target));
+      raf = requestAnimationFrame(tick);
+      safety = window.setTimeout(finish, delay + duration + 300);
+    };
 
-          if (progress < 1) {
-            requestAnimationFrame(tick);
-          }
-        };
-
-        requestAnimationFrame(tick);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        animate();
+        observer.disconnect();
       },
-      { threshold: 0.35 }
+      { threshold: 0.05, rootMargin: "0px 0px 10% 0px" }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+
+    const probe = window.setInterval(() => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.95 && rect.bottom > 24;
+      if (!inView) return;
+      animate();
+      window.clearInterval(probe);
+    }, 180);
+
+    const stopProbe = window.setTimeout(() => window.clearInterval(probe), 20000);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+      window.clearTimeout(safety);
+      window.clearInterval(probe);
+      window.clearTimeout(stopProbe);
+    };
   }, [target, duration, delay]);
 
   return (

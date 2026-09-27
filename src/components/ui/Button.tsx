@@ -14,13 +14,13 @@ interface ButtonProps {
 
 const variants = {
   primary:
-    "btn-shimmer bg-vermillion text-cream hover:bg-vermillion-dark shadow-lg shadow-vermillion/30 focus-visible:ring-vermillion",
+    "btn-shimmer text-on-gold shadow-lg shadow-gold/35 hover:shadow-gold/55 focus-visible:ring-gold",
   secondary:
-    "bg-ink text-cream hover:bg-night-soft focus-visible:ring-vermillion",
+    "bg-gradient-to-br from-vermillion to-maroon text-cream shadow-lg shadow-maroon/30 hover:brightness-110 focus-visible:ring-vermillion",
   outline:
-    "border-2 border-vermillion text-vermillion hover:bg-vermillion hover:text-cream focus-visible:ring-vermillion",
+    "border-2 border-gold-ink bg-transparent text-gold-ink hover:border-maroon hover:bg-maroon hover:text-cream focus-visible:ring-gold",
   "outline-light":
-    "border-2 border-saffron/70 text-cream hover:border-saffron hover:bg-saffron/15 focus-visible:ring-saffron",
+    "border-2 border-gold/80 bg-transparent text-cream hover:border-gold hover:bg-gold/15 focus-visible:ring-gold",
 };
 
 const sizes = {
@@ -40,7 +40,7 @@ export function Button({
   ariaLabel,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory",
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory",
     variants[variant],
     sizes[size],
     className

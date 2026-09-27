@@ -134,7 +134,7 @@ export function FestivalCountdown() {
           aria-live="off"
           aria-label={`नवरात्र उत्सवाला ${remaining.days} दिवस ${remaining.hours} तास ${remaining.minutes} मिनिटे उरले आहेत`}
         >
-          <p className="px-1 text-xs font-semibold leading-relaxed tracking-[0.18em] text-vermillion sm:tracking-[0.22em]">
+          <p className="px-1 text-xs font-semibold leading-relaxed text-gold-ink">
             नवरात्र उत्सवाला सुरुवात होण्यास
           </p>
           <div className="mt-4 flex items-stretch justify-center gap-1 sm:mt-5 sm:gap-3">
@@ -151,7 +151,7 @@ export function FestivalCountdown() {
                 className="flex min-w-0 flex-1 items-center gap-1 sm:flex-none sm:gap-3"
               >
                 <div className="min-w-0 flex-1 rounded-2xl border border-vermillion/12 bg-card px-1.5 py-3 shadow-sm sm:min-w-[4.75rem] sm:flex-none sm:px-3">
-                  <p className="font-display text-xl text-vermillion tabular-nums sm:text-4xl">
+                  <p className="font-display text-xl text-gold-ink tabular-nums sm:text-4xl">
                     {formatStatNumber(unit.value)}
                   </p>
                   <p className="mt-1 text-[0.65rem] font-medium leading-snug text-ink-muted sm:text-xs">

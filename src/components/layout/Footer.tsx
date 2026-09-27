@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { contactInfo, socialLinks } from "@/data/contact";
-import { navigation, siteConfig } from "@/data/site";
+import { mobileNavigation, siteConfig } from "@/data/site";
 import { Logo } from "@/components/ui/Logo";
 
 function InstagramIcon() {
@@ -63,7 +63,7 @@ export function Footer() {
   const visibleSocial = socialItems.filter((item) => Boolean(item.href));
 
   return (
-    <footer className="relative z-10 border-t border-gold/20 bg-night text-cream">
+    <footer className="relative z-10 border-t border-gold/30 bg-gradient-to-b from-wine via-night to-night text-cream">
       <div className="container-main pt-12 pb-24 sm:py-14 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
@@ -77,7 +77,7 @@ export function Footer() {
             <p className="mt-3 text-sm leading-relaxed text-cream/70">
               {contactInfo.addressLines[0]}
               <br />
-              नागपूर, <span lang="mr" className="mr-word">महाराष्ट्र</span>
+              {contactInfo.addressLines[1]}
             </p>
             <p className="mt-2 text-sm text-gold">
               स्थापना: {siteConfig.foundedYear}
@@ -87,7 +87,7 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-sm font-semibold text-gold">दुवे</h4>
             <ul className="space-y-1">
-              {navigation.map((item) => (
+              {mobileNavigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -142,7 +142,7 @@ export function Footer() {
               <li className="leading-relaxed">
                 {contactInfo.addressLines[0]}
                 <br />
-                नागपूर, <span lang="mr" className="mr-word">महाराष्ट्र</span>
+                {contactInfo.addressLines[1]}
               </li>
             </ul>
           </div>
@@ -157,7 +157,7 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-12 w-12 items-center justify-center rounded-full bg-[#9a9a9a] text-white transition-transform hover:scale-105 hover:bg-gold hover:text-night focus-ring-dark"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-cream/10 text-gold ring-1 ring-gold/50 transition-all duration-200 hover:scale-105 hover:bg-gold hover:text-night focus-ring-dark"
                     aria-label={item.label}
                   >
                     {item.icon}

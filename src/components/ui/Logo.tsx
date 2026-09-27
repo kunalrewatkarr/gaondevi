@@ -56,7 +56,7 @@ export function Logo({
           <p className="font-display text-base leading-tight md:text-lg">
             {siteConfig.name}
           </p>
-          <p className="text-xs text-vermillion">{siteConfig.location}</p>
+          <p className="text-xs text-gold-ink">{siteConfig.location}</p>
         </div>
       )}
     </div>

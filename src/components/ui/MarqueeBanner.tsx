@@ -13,7 +13,7 @@ export function MarqueeBanner() {
   const line = items.join("   ✦   ");
 
   return (
-    <div className="overflow-hidden border-y border-saffron/35 bg-gradient-to-r from-wine via-maroon to-vermillion py-3 text-cream">
+    <div className="relative overflow-hidden border-y border-gold/55 bg-gradient-to-r from-wine via-maroon to-vermillion py-3.5 text-cream shadow-[inset_0_1px_0_rgba(212,165,55,0.45)]">
       <p className="sr-only">
         {siteConfig.tagline}. स्थापना {siteConfig.foundedYear}.{" "}
         {siteConfig.location}.
@@ -29,6 +29,14 @@ export function MarqueeBanner() {
           {line}
         </span>
       </div>
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-wine to-transparent sm:w-24"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-vermillion to-transparent sm:w-24"
+        aria-hidden="true"
+      />
     </div>
   );
 }

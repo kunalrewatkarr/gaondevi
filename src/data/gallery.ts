@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, statSync } from "fs";
 import { join } from "path";
 import { IMAGE_EXTENSIONS, listPublicImages } from "@/lib/media";
+import { formatStatNumber } from "@/lib/numerals";
 
 export type GalleryCategory =
   | "देवी दर्शन"
@@ -38,6 +39,21 @@ export const galleryFolderMap: Record<string, GalleryCategory> = {
 
 const GALLERY_ROOT = join(process.cwd(), "public/images/gallery");
 
+const galleryAltByFolder: Record<string, string> = {
+  darshan: "श्री दुर्गा मातेचे दर्शन",
+  utsav: "नवरात्र उत्सवाचे दृश्य",
+  sanskriti: "सांस्कृतिक कार्यक्रमाचे क्षण",
+  mandap: "उत्सवाचा मंडप",
+  karyakarte: "मंडळाचे कार्यकर्ते",
+  samaj: "सामाजिक उपक्रम",
+};
+
+function galleryAlt(folder: string, category: string, index: number, total: number): string {
+  const label = galleryAltByFolder[folder] ?? category;
+  const count = total > 1 ? ` ${formatStatNumber(index + 1)}` : "";
+  return `${label}${count} — नवयुवक दुर्गा उत्सव मंडळ`;
+}
+
 function isImageFile(name: string): boolean {
   return IMAGE_EXTENSIONS.some((ext) => name.toLowerCase().endsWith(ext));
 }
@@ -58,7 +74,7 @@ export function getGalleryImages(): GalleryImage[] {
         id: `${folder}-${index + 1}`,
         src,
         category,
-        alt: `${category} — ${index + 1}`,
+        alt: galleryAlt(folder, category, index, files.length),
       });
     });
   }
@@ -76,6 +92,6 @@ export function getGalleryImages(): GalleryImage[] {
       id: `loose-${index + 1}`,
       src: `/images/gallery/${name}`,
       category: "उत्सव" as const,
-      alt: `उत्सव — ${index + 1}`,
+      alt: galleryAlt("utsav", "उत्सव", index, loose.length),
     }));
 }

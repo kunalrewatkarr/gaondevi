@@ -13,16 +13,16 @@ export function Hero() {
       <div className="absolute inset-0 overflow-hidden">
         <Image
           src={durgaImages.hero}
-          alt="नवयुवक दुर्गा उत्सव मंडळ — मंडप व दर्शन"
+          alt="श्री दुर्गा माता — नवयुवक दुर्गा उत्सव मंडळ"
           fill
           priority
           sizes="100vw"
-          className="animate-ken-burns scale-110 object-cover object-[center_28%] motion-reduce:animate-none motion-reduce:scale-100"
+          className="h-full w-full origin-[center_30%] scale-[1.35] object-cover object-[center_28%] sm:origin-[center_28%] sm:scale-[1.2] sm:object-[center_26%] lg:origin-[center_38%] lg:scale-[1.7] lg:object-[center_38%]"
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/70 to-night/45" />
-      <div className="absolute inset-0 bg-gradient-to-t from-night/92 via-night/25 to-night/45" />
+      <div className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-night/15" />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-night/90 via-night/40 to-transparent sm:block" />
 
       <div
         className="animate-pulse-glow absolute -left-24 top-16 h-80 w-80 rounded-full bg-vermillion/35 blur-3xl"
@@ -33,7 +33,7 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="container-main relative z-10 w-full pb-14 pt-24 sm:pb-20 sm:pt-36 md:pb-28">
+      <div className="container-main relative z-10 w-full pb-36 pt-24 sm:pb-20 sm:pt-36 md:pb-28">
         <div className="grid items-end gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="max-w-3xl">
             <p className="animate-fade-up mb-4 max-w-full rounded-2xl border border-gold/35 bg-night/55 px-3.5 py-2 text-sm leading-relaxed text-rose-gold backdrop-blur-sm sm:inline-block sm:rounded-full sm:px-4">
@@ -57,24 +57,16 @@ export function Hero() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
-              <Button href="#events" size="lg" className="w-full sm:w-auto">
-                २०२६ चा कार्यक्रम
-              </Button>
-              <Button
-                href="#durga"
-                variant="outline-light"
-                size="lg"
-                className="w-full sm:w-auto"
-              >
+              <Button href="#durga" size="lg" className="w-full sm:w-auto">
                 दर्शन
               </Button>
               <Button
-                href="#contact"
+                href="#events"
                 variant="outline-light"
                 size="lg"
                 className="w-full sm:w-auto"
               >
-                दिशा पहा
+                २०२६ चा कार्यक्रम
               </Button>
             </div>
           </div>

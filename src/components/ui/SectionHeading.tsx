@@ -24,8 +24,8 @@ export function SectionHeading({
       {kicker && (
         <p
           className={cn(
-            "mb-3 text-xs font-semibold uppercase tracking-[0.28em]",
-            isDark ? "text-saffron" : "text-vermillion"
+            "mb-3 text-xs font-semibold",
+            isDark ? "text-saffron" : "text-gold-ink"
           )}
         >
           {kicker}
@@ -40,17 +40,17 @@ export function SectionHeading({
         <span
           className={cn(
             "h-px w-10",
-            isDark ? "bg-saffron/60" : "bg-vermillion/50"
+            isDark ? "bg-saffron/70" : "bg-gold/70"
           )}
           aria-hidden="true"
         />
-        <span className={cn("text-xl", isDark ? "text-saffron" : "text-vermillion")} aria-hidden="true">
+        <span className={cn("text-xl", isDark ? "text-saffron" : "text-gold")} aria-hidden="true">
           ✦
         </span>
         <span
           className={cn(
             "h-px w-10",
-            isDark ? "bg-saffron/60" : "bg-vermillion/50"
+            isDark ? "bg-saffron/70" : "bg-gold/70"
           )}
           aria-hidden="true"
         />
