@@ -1,0 +1,54 @@
+How to add original photos (50–100 files)
+==========================================
+
+You do NOT need to edit any React components.
+Drop files into these folders and restart `npm run dev`.
+
+1) Mandal LOGO (navbar, footer, browser tab)
+   public/images/logo/mandal-logo.png
+   (or mandal-logo.webp — replaces automatically)
+
+2) Durga Maa murti photos
+   public/images/durga/hero.png       → homepage background
+   public/images/durga/main.png       → about + hero portrait
+   public/images/durga/secondary.png  → श्री दुर्गामाता section
+   public/images/durga/murti-original.png → full original (backup)
+
+3) Durga Maa — HERO BACKGROUND (main homepage banner)
+   Save your Durga Maa photo as:
+   public/images/durga/hero.webp
+   (or hero.jpg / hero.png — any of these work)
+
+   This replaces the dark placeholder and shows full-screen behind the title.
+   Restart: npm run dev
+
+   Other Durga section photos:
+   public/images/durga/main.webp      → About section
+   public/images/durga/secondary.webp  → श्री दुर्गामाता section
+
+2) Committee (match member order 01 = president)
+   public/images/committee/01.webp
+   public/images/committee/02.webp
+   ...
+   public/images/committee/10.webp
+
+3) Gallery — drop as many photos as you want (50–100 is fine)
+   public/images/gallery/darshan/     देवी दर्शन
+   public/images/gallery/utsav/       उत्सव
+   public/images/gallery/sanskriti/   सांस्कृतिक कार्यक्रम
+   public/images/gallery/mandap/      मंडप
+   public/images/gallery/karyakarte/  कार्यकर्ते
+   public/images/gallery/samaj/       सामाजिक उपक्रम
+
+   Any name is OK: photo-1.jpg, IMG_2048.webp, visarjan-09.png
+   Preferred: .webp  (also .jpg .jpeg .png .avif)
+
+4) Mandap highlight photos
+   public/images/mandap/01.webp
+   public/images/mandap/02.webp
+   public/images/mandap/03.webp
+
+Tips
+- Compress large phone photos (aim under ~400KB each) for a fast site.
+- Real photos automatically replace SVG placeholders when the filename matches.
+- Gallery folders are scanned automatically — no list to update.
