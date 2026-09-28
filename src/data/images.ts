@@ -40,6 +40,9 @@ export const mandapImages = {
   ),
 };
 
+/** Official mandal poster — झिंगाबाई टाकळीची आई */
+export const posterImage = "/images/branding/taklichi-aai.png";
+
 /** घटस्थापना / अखंड मनोकामना ज्योत */
 export const jyotImages = {
   main: resolveFirstExisting(

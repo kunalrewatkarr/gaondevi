@@ -14,9 +14,9 @@ export const siteConfig = {
 export const navigation = [
   { label: "मुख्यपृष्ठ", href: "#home" },
   { label: "आमच्याबद्दल", href: "#about" },
+  { label: "कार्यकारिणी", href: "#committee" },
   { label: "श्री दुर्गामाता", href: "#durga" },
   { label: "नवरात्र उत्सव", href: "#events" },
-  { label: "कार्यकारिणी", href: "#committee" },
   { label: "फोटो गॅलरी", href: "#gallery" },
   { label: "योगदान", href: "#donation" },
   { label: "संपर्क", href: "#contact" },
@@ -25,9 +25,9 @@ export const navigation = [
 export const mobileNavigation = [
   { label: "मुख्यपृष्ठ", href: "#home" },
   { label: "आमच्याबद्दल", href: "#about" },
-  { label: "आरती व भजन", href: "#aarti" },
-  { label: "श्री दुर्गामाता सांस्कृतिक कार्यक्रम", href: "#durga" },
   { label: "कार्यकारिणी", href: "#committee" },
+  { label: "श्री दुर्गामाता सांस्कृतिक कार्यक्रम", href: "#durga" },
+  { label: "आरती व भजन", href: "#aarti" },
   { label: "महाप्रसाद", href: "#mahaprasad" },
   { label: "फोटो गॅलरी", href: "#gallery" },
   { label: "योगदान", href: "#donation" },

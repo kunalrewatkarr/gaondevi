@@ -10,11 +10,25 @@ export interface CommitteeMember {
   description?: string;
 }
 
+const namedPhotos: Record<string, string> = {
+  "01": "/images/committee/ajay-adhyaksha",
+  "02": "/images/committee/bhushan-upaadhyaksha",
+  "03": "/images/committee/atul-sachiv",
+  "04": "/images/committee/sandip-sahasachiv",
+  "05": "/images/committee/vikas-koshadhyaksha",
+  "07": "/images/committee/sudhir-hishobnis",
+  "10": "/images/committee/pranit-hisobnis",
+};
+
 function memberPhoto(id: string): string {
-  return resolveFirstExisting(
-    [`/images/committee/${id}`, `/images/committee/member-${id}`],
-    `/images/committee/member-${id}.svg`
-  );
+  const stems = [
+    namedPhotos[id],
+    `/images/committee/${id}`,
+    `/images/committee/member-${id}`,
+  ].filter(Boolean) as string[];
+
+  const found = resolveFirstExisting(stems, "");
+  return found;
 }
 
 /** Main office-bearers, then हिशोबनीस on their own row. Photos: 01.webp … in public/images/committee/ */

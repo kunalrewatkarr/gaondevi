@@ -17,7 +17,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="h-full w-full origin-[center_30%] scale-[1.35] object-cover object-[center_28%] sm:origin-[center_28%] sm:scale-[1.2] sm:object-[center_26%] lg:origin-[center_38%] lg:scale-[1.7] lg:object-[center_38%]"
+          className="object-cover object-[center_52%]"
         />
       </div>
 

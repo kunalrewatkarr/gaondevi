@@ -1,10 +1,19 @@
 import { getGalleryImages } from "@/data/gallery";
+import { posterImage } from "@/data/images";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GalleryGrid } from "@/components/ui/GalleryLightbox";
 import { FadeIn } from "@/components/ui/FadeIn";
 
 export function Gallery() {
-  const images = getGalleryImages();
+  const images = [
+    {
+      id: "taklichi-aai",
+      src: posterImage,
+      category: "उत्सव" as const,
+      alt: "झिंगाबाई टाकळीची आई — नवयुवक दुर्गा उत्सव मंडळ",
+    },
+    ...getGalleryImages(),
+  ];
 
   return (
     <section id="gallery" className="section-padding bg-night">

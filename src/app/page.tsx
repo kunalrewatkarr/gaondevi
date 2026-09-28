@@ -26,13 +26,12 @@ export default function Home() {
         <Hero />
         <MarqueeBanner />
         <About />
+        <Committee />
         <SectionDivider />
         <DurgaMaa />
         <Events />
         <FestivalExperience />
         <Stats />
-        <SectionDivider />
-        <Committee />
         <SocialWork />
         <Gallery />
         <Contact />
