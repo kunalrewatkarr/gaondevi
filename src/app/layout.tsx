@@ -3,6 +3,7 @@ import { Noto_Sans_Devanagari, Tiro_Devanagari_Marathi } from "next/font/google"
 import { logoImage } from "@/data/branding";
 import { contactInfo, socialLinks } from "@/data/contact";
 import { siteConfig } from "@/data/site";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const notoDevanagari = Noto_Sans_Devanagari({
@@ -128,6 +129,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <div className="grain" aria-hidden="true" />
         {children}
+        <Analytics />
       </body>
     </html>
   );
