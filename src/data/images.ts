@@ -9,11 +9,11 @@ import { resolveFirstExisting } from "@/lib/media";
 export const durgaImages = {
   hero: resolveFirstExisting(
     ["/images/durga/main", "/images/durga/durgamaa"],
-    "/images/durga/main.jpg"
+    "/images/durga/main.jpeg"
   ),
   main: resolveFirstExisting(
     ["/images/durga/main", "/images/durga/durgamaa"],
-    "/images/durga/main.jpg"
+    "/images/durga/main.jpeg"
   ),
   secondary: resolveFirstExisting(
     ["/images/durga/durgamaa", "/images/durga/secondary", "/images/durga/main"],
@@ -23,20 +23,20 @@ export const durgaImages = {
 
 export const mandapImages = {
   primary: resolveFirstExisting(
-    ["/images/mandap/mandap", "/images/gallery/mandap/mandap"],
-    "/images/mandap/mandap.jpg"
+    ["/images/gallery/mandap/whatsapp-mandap-new", "/images/mandap/mandap", "/images/gallery/mandap/mandap"],
+    "/images/gallery/mandap/whatsapp-mandap-new.jpeg"
   ),
   secondary: resolveFirstExisting(
-    ["/images/gallery/mandap/mandap2", "/images/mandap/mandap"],
-    "/images/gallery/mandap/mandap2.jpg"
+    ["/images/gallery/mandap/mandap", "/images/mandap/mandap"],
+    "/images/gallery/mandap/mandap.jpg"
   ),
   tertiary: resolveFirstExisting(
-    [
-      "/images/gallery/utsav/utsav2",
-      "/images/gallery/sanskriti/sanskriti",
-      "/images/gallery/mandap/mandap",
-    ],
-    "/images/gallery/utsav/utsav2.jpg"
+    ["/images/gallery/utsav/utsav3", "/images/gallery/utsav/utsav2", "/images/gallery/sanskriti/sanskriti"],
+    "/images/gallery/utsav/utsav3.jpeg"
+  ),
+  quaternary: resolveFirstExisting(
+    ["/images/gallery/karyakarte/whatsapp-karyakarte-1", "/images/gallery/karyakarte/karyakarte"],
+    "/images/gallery/karyakarte/whatsapp-karyakarte-1.jpeg"
   ),
 };
 
@@ -47,6 +47,6 @@ export const posterImage = "/images/branding/taklichi-aai.png";
 export const jyotImages = {
   main: resolveFirstExisting(
     ["/images/jyot/ghat", "/images/jyot/akhand-jyot", "/images/jyot/main"],
-    "/images/jyot/ghat.jpg"
+    "/images/jyot/ghat.jpeg"
   ),
 };

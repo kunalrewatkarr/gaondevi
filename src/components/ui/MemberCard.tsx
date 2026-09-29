@@ -15,7 +15,7 @@ export function MemberCard({ member }: MemberCardProps) {
             alt={`${member.name} — ${member.role}`}
             fill
             sizes="(max-width: 640px) 40vw, 180px"
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className={`object-cover ${member.imagePosition || "object-[50%_35%]"} scale-100 transition-transform duration-700 group-hover:scale-105`}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-b from-wine to-maroon px-2 text-center">

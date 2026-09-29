@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
-  title: string;
+  title: string | React.ReactNode;
   subtitle?: string;
   centered?: boolean;
   className?: string;
   tone?: "light" | "dark";
   kicker?: string;
+  shimmerDivider?: boolean;
 }
 
 export function SectionHeading({
@@ -16,6 +17,7 @@ export function SectionHeading({
   className,
   tone = "light",
   kicker,
+  shimmerDivider = false,
 }: SectionHeadingProps) {
   const isDark = tone === "dark";
 
@@ -34,7 +36,8 @@ export function SectionHeading({
       <div
         className={cn(
           "mb-4 flex items-center gap-3",
-          centered && "justify-center"
+          centered && "justify-center",
+          shimmerDivider && "shimmer-divider"
         )}
       >
         <span

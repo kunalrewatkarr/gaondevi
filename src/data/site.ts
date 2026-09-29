@@ -6,7 +6,7 @@ export const siteConfig = {
   tagline: "भक्ती, संस्कृती आणि एकतेचा उत्सव",
   welcomeMessage: "नवरात्र उत्सवाच्या पावन पर्वात आपले हार्दिक स्वागत",
   foundedYear: 1980,
-  url: "https://navyuwakdurgautsavmandal.netlify.app",
+  url: "https://gaondevi.vercel.app",
   venue: "श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर",
   programmeYear: "२०२६",
 } as const;
@@ -29,6 +29,7 @@ export const mobileNavigation = [
   { label: "श्री दुर्गामाता सांस्कृतिक कार्यक्रम", href: "#durga" },
   { label: "आरती व भजन", href: "#aarti" },
   { label: "महाप्रसाद", href: "#mahaprasad" },
+  { label: "सामाजिक कार्य", href: "#social" },
   { label: "फोटो गॅलरी", href: "#gallery" },
   { label: "योगदान", href: "#donation" },
   { label: "माता विसर्जन", href: "#visarjan" },

@@ -440,6 +440,48 @@ html[data-theme="dark"] .grain {
   }
 }
 
+@keyframes shimmer-divider {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+@keyframes sparkle-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes mandala-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .animate-fade-up {
   animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -577,4 +619,170 @@ html[data-theme="dark"] .grain {
 :focus-visible {
   outline: 2px solid var(--vermillion);
   outline-offset: 3px;
+}
+
+/* ── Festival Experience Background Effects ── */
+.festival-bg {
+  position: relative;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196, 132, 42, 0.15), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 20% 60%, rgba(140, 29, 46, 0.12), transparent 50%),
+    radial-gradient(ellipse 55% 35% at 80% 70%, rgba(201, 150, 44, 0.1), transparent 45%),
+    var(--night);
+}
+
+.festival-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4a537' stroke-width='0.5' opacity='0.08'%3E%3Ccircle cx='200' cy='200' r='180'/%3E%3Ccircle cx='200' cy='200' r='140'/%3E%3Ccircle cx='200' cy='200' r='100'/%3E%3Ccircle cx='200' cy='200' r='60'/%3E%3Cpath d='M200 20 L200 380 M20 200 L380 200 M58 58 L342 342 M342 58 L58 342'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 600px 600px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  pointer-events: none;
+}
+
+.sparkle-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--saffron);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle-float 4s ease-in-out infinite;
+}
+
+.sparkle-particle:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; }
+.sparkle-particle:nth-child(2) { left: 25%; top: 60%; animation-delay: 0.5s; }
+.sparkle-particle:nth-child(3) { left: 75%; top: 30%; animation-delay: 1s; }
+.sparkle-particle:nth-child(4) { left: 85%; top: 70%; animation-delay: 1.5s; }
+.sparkle-particle:nth-child(5) { left: 50%; top: 40%; animation-delay: 2s; }
+.sparkle-particle:nth-child(6) { left: 40%; top: 80%; animation-delay: 2.5s; }
+
+.shimmer-divider {
+  animation: shimmer-divider 3s ease-in-out infinite;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--cream) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Gallery Grid & Lightbox ── */
+.gallery-grid-uniform {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-grid-uniform {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid-uniform {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+.gallery-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--night-soft);
+  border: 1px solid color-mix(in srgb, var(--saffron) 20%, transparent);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.gallery-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px -12px color-mix(in srgb, var(--saffron) 30%, transparent);
+}
+
+.gallery-card-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--night-soft) 0%,
+    color-mix(in srgb, var(--saffron) 10%, var(--night-soft)) 50%,
+    var(--night-soft) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-btn 1.5s ease-in-out infinite;
+}
+
+.gallery-eye-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--night) 60%, transparent);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--saffron);
+  color: var(--saffron);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.gallery-card:hover .gallery-eye-btn,
+.gallery-card:focus-within .gallery-eye-btn {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (hover: none) {
+  .gallery-eye-btn {
+    opacity: 0.7;
+    top: auto;
+    bottom: 8px;
+    left: auto;
+    right: 8px;
+    transform: none;
+  }
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 12, 14, 0.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.lightbox-image-container {
+  animation: lightbox-in 0.3s ease-out;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery-filter-transition {
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }

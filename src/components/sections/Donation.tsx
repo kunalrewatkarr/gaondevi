@@ -2,21 +2,27 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  buildUpiPayLink,
-  donationConfig,
-  isDonationPaymentReady,
-} from "@/data/donation";
+import { QRCodeSVG } from "qrcode.react";
+import { contactInfo } from "@/data/contact";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
+
+const UPI_ID = "7709716783@okbizaxis";
+const PAYEE_NAME = "Navyuvak Durga Utsav Mandal";
+const NOTE = "Navratri Yogdan";
+
+const AMOUNTS = [101, 251, 501, 1101];
 
 export function Donation() {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+  const [customAmount, setCustomAmount] = useState("");
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
-  const paymentReady = isDonationPaymentReady();
-  const upiLink = buildUpiPayLink();
+
+  const amount = selectedAmount || (customAmount ? parseFloat(customAmount) : null);
+  const upiLink = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&tn=${encodeURIComponent(NOTE)}&cu=INR${amount ? `&am=${amount}` : ""}`;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -30,14 +36,23 @@ export function Donation() {
   }, [open]);
 
   const copyUpi = async () => {
-    if (!donationConfig.upiId) return;
     try {
-      await navigator.clipboard.writeText(donationConfig.upiId);
+      await navigator.clipboard.writeText(UPI_ID);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
     }
+  };
+
+  const handleAmountSelect = (value: number) => {
+    setSelectedAmount(prev => prev === value ? null : value);
+    setCustomAmount("");
+  };
+
+  const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomAmount(e.target.value);
+    setSelectedAmount(null);
   };
 
   return (
@@ -49,10 +64,10 @@ export function Donation() {
               योगदान
             </p>
             <h2 className="mt-4 font-display text-2xl leading-snug sm:text-3xl md:text-4xl">
-              {donationConfig.heading}
+              देवीच्या उत्सवासाठी आपले योगदान
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-cream/85">
-              {donationConfig.description}
+              मंडळाच्या उत्सव व सामाजिक उपक्रमांसाठी आपले योगदान महत्त्वाचे आहे.
             </p>
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Button
@@ -61,10 +76,10 @@ export function Donation() {
                 onClick={() => setOpen(true)}
                 className="min-h-14 w-full px-10 text-xl shadow-[0_10px_32px_-8px_rgba(212,165,55,0.85)] sm:min-w-[16rem] sm:w-auto"
               >
-                {donationConfig.ctaLabel}
+                योगदान द्या
               </Button>
               <a
-                href={`tel:${donationConfig.phone}`}
+                href={`tel:${contactInfo.phone}`}
                 className="inline-flex min-h-12 w-full items-center justify-center rounded-full border-2 border-saffron/70 px-8 py-4 text-lg font-semibold tracking-wide text-cream transition-all duration-300 hover:border-saffron hover:bg-saffron/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron focus-visible:ring-offset-2 focus-visible:ring-offset-maroon sm:w-auto"
               >
                 संपर्क करा
@@ -87,7 +102,7 @@ export function Donation() {
                 योगदान
               </p>
               <h3 id={titleId} className="mt-2 font-display text-xl leading-snug text-ink sm:text-2xl">
-                {donationConfig.heading}
+                देवीच्या उत्सवासाठी आपले योगदान
               </h3>
             </div>
             <button
@@ -101,62 +116,94 @@ export function Donation() {
           </div>
 
           <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-            {paymentReady
-              ? "मंडळाच्या उत्सव व सामाजिक उपक्रमांसाठी आपल्या इच्छेनुसार योगदान द्या."
-              : "UPI / QR तपशील लवकरच उपलब्ध होतील. सध्या संपर्क करून योगदान देऊ शकता."}
+            मंडळाच्या उत्सव व सामाजिक उपक्रमांसाठी आपल्या इच्छेनुसार योगदान द्या.
           </p>
 
-          {paymentReady ? (
-            <div className="mt-6 space-y-5">
-              {donationConfig.qrCodeImage ? (
-                <div className="rounded-2xl bg-ivory p-4 text-center ring-1 ring-ink/8">
-                  <p className="mb-3 text-sm font-medium text-ink">
-                    QR स्कॅन करून योगदान द्या
-                  </p>
-                  <div className="relative mx-auto aspect-square w-[min(100%,13rem)] overflow-hidden rounded-xl bg-ivory sm:w-52">
+          <div className="mt-6 space-y-5">
+            <div className="flex flex-wrap gap-2">
+              {AMOUNTS.map((amt) => (
+                <button
+                  key={amt}
+                  type="button"
+                  onClick={() => handleAmountSelect(amt)}
+                  className={`rounded-full border-2 px-4 py-2 text-sm font-medium transition-all duration-150 ${
+                    selectedAmount === amt
+                      ? "border-gold bg-gold text-night scale-105 shadow-[0_0_20px_rgba(212,165,55,0.4)]"
+                      : "border-gold/50 text-ink hover:border-gold hover:bg-gold/10"
+                  }`}
+                >
+                  ₹{amt}
+                </button>
+              ))}
+              <div className="relative">
+                <input
+                  type="number"
+                  value={customAmount}
+                  onChange={handleCustomAmountChange}
+                  placeholder="इतर रक्कम"
+                  className="w-28 rounded-full border-2 border-gold/50 px-4 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                />
+              </div>
+            </div>
+
+            <div className="relative inline-block rounded-2xl border-2 border-gold/30 bg-ivory p-4 ring-1 ring-gold/20">
+              <div className="relative mx-auto aspect-square w-[min(100%,13rem)] overflow-hidden rounded-xl bg-white sm:w-52">
+                <QRCodeSVG
+                  value={upiLink}
+                  size={208}
+                  level="H"
+                  includeMargin={false}
+                  className="h-full w-full"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="rounded-full bg-white p-1.5 shadow-lg">
                     <Image
-                      src={donationConfig.qrCodeImage}
-                      alt="योगदान QR कोड"
-                      fill
-                      className="object-contain p-2"
-                      sizes="208px"
+                      src="/images/logo/mandal-logo.png"
+                      alt="Mandal Logo"
+                      width={37}
+                      height={37}
+                      className="rounded-full"
                     />
                   </div>
                 </div>
-              ) : null}
-
-              {donationConfig.upiId ? (
-                <div className="rounded-2xl bg-ivory px-4 py-3 ring-1 ring-ink/8">
-                  <p className="text-xs text-ink-muted">UPI ID</p>
-                  <p className="mt-1 break-all font-medium text-ink">
-                    {donationConfig.upiId}
-                  </p>
-                  <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                    <Button type="button" size="sm" onClick={copyUpi} className="w-full sm:w-auto">
-                      {copied ? "कॉपी झाले" : "UPI ID कॉपी करा"}
-                    </Button>
-                    {upiLink ? (
-                      <a href={upiLink} className="btn-pill btn-pill-gold focus-ring sm:w-auto">
-                        UPI द्वारे योगदान द्या
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          ) : (
-            <div className="mt-6 space-y-3 rounded-3xl bg-ivory p-4 ring-1 ring-gold/35">
-              <p className="text-sm text-ink-muted">
-                UPI / QR तपशील लवकरच. योगदानासाठी मंडळाशी संपर्क साधा:
+              </div>
+              <p className="mt-3 text-sm font-medium text-ink">
+                कोणत्याही UPI ॲपने स्कॅन करा
               </p>
+            </div>
+
+            <a
+              href={upiLink}
+              className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-gold px-8 py-4 text-lg font-semibold text-night shadow-[0_10px_32px_-8px_rgba(212,165,55,0.85)] transition-all duration-150 hover:scale-[1.02] hover:shadow-[0_12px_40px_-8px_rgba(212,165,55,0.95)] active:scale-[0.98] sm:hidden focus-ring"
+            >
+              UPI ॲपने योगदान द्या
+            </a>
+
+            <div className="hidden sm:block text-center text-sm text-ink-muted">
+              मोबाईलवरून स्कॅन करा
+            </div>
+
+            <div className="rounded-2xl bg-ivory px-4 py-3 ring-1 ring-ink/8">
+              <p className="text-xs text-ink-muted">UPI ID</p>
+              <p className="mt-1 break-all font-medium text-ink">
+                {UPI_ID}
+              </p>
+              <div className="mt-3">
+                <Button type="button" size="sm" onClick={copyUpi} className="w-full sm:w-auto">
+                  {copied ? "कॉपी झाले ✓" : "कॉपी करा"}
+                </Button>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               <a
-                href={`tel:${donationConfig.phone}`}
+                href={`tel:${contactInfo.phone}`}
                 className="btn-pill btn-pill-call focus-ring"
               >
-                कॉल करा · {donationConfig.phone}
+                कॉल करा · {contactInfo.phone}
               </a>
               <a
-                href={`https://wa.me/91${donationConfig.phone}`}
+                href={`https://wa.me/91${contactInfo.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-pill btn-pill-wa focus-ring"
@@ -164,7 +211,7 @@ export function Donation() {
                 WhatsApp करा
               </a>
             </div>
-          )}
+          </div>
 
           <button
             type="button"
