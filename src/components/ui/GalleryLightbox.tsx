@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import type { GalleryImage } from "@/data/gallery";
 import { Button } from "@/components/ui/Button";
@@ -86,23 +87,27 @@ export function GalleryLightbox({
       }
     };
 
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     window.addEventListener("keydown", handleKey);
     closeRef.current?.focus();
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
       window.removeEventListener("keydown", handleKey);
       previouslyFocused?.focus();
     };
   }, [onClose, goNext, goPrev]);
 
-  if (!current) return null;
+  if (!current || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div
       ref={dialogRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-night/96 backdrop-blur-md"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-night/96 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-label="फोटो गॅलरी — पूर्णस्क्रीन दृश्य"
@@ -112,7 +117,10 @@ export function GalleryLightbox({
     >
       <button
         ref={closeRef}
-        onClick={onClose}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
         className="absolute right-3 top-[max(1rem,env(safe-area-inset-top))] z-10 flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-cream/20 focus-ring-dark sm:right-4 sm:top-4"
         aria-label="बंद करा"
       >
@@ -153,21 +161,21 @@ export function GalleryLightbox({
       </button>
 
       <div
-        className="relative mx-3 max-h-[85dvh] w-full max-w-5xl overflow-y-auto sm:mx-4 lightbox-image-container"
+        className="lightbox-image-container relative z-10 mx-3 max-h-full w-fit max-w-[90vw] overflow-y-auto overscroll-contain sm:mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative mx-auto w-full max-w-[min(90vw,56rem)] overflow-hidden rounded-2xl ring-1 ring-saffron/30 sm:rounded-3xl">
+        <div className="relative mx-auto w-fit max-w-[90vw] overflow-hidden rounded-2xl ring-1 ring-saffron/30 sm:rounded-3xl">
           <Image
             src={current.src}
             alt={current.alt}
             width={1200}
             height={900}
             sizes="90vw"
-            className="w-full object-contain"
+            className="h-auto w-auto max-h-[85vh] max-w-[90vw] object-contain"
             priority
           />
         </div>
-        <div className="mt-4 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center">
+        <div className="mt-4 shrink-0 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center">
           <p className="text-base font-medium leading-snug text-cream sm:text-lg">
             {current.alt}
           </p>
@@ -199,7 +207,8 @@ export function GalleryLightbox({
           <path d="M9 18l6-6-6-6" />
         </svg>
       </button>
-    </div>
+    </div>,
+    document.body
   );
 }
 
