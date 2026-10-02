@@ -12,28 +12,28 @@ export const siteConfig = {
 } as const;
 
 export const navigation = [
-  { label: "मुख्यपृष्ठ", href: "#home" },
-  { label: "आमच्याबद्दल", href: "#about" },
-  { label: "कार्यकारिणी", href: "#committee" },
-  { label: "श्री दुर्गामाता", href: "#durga" },
-  { label: "नवरात्र उत्सव", href: "#events" },
-  { label: "फोटो गॅलरी", href: "#gallery" },
-  { label: "योगदान", href: "#donation" },
-  { label: "संपर्क", href: "#contact" },
+  { labelKey: "nav.home", href: "#home" },
+  { labelKey: "nav.about", href: "#about" },
+  { labelKey: "nav.committee", href: "#committee" },
+  { labelKey: "nav.durga", href: "#durga" },
+  { labelKey: "nav.navratri", href: "#events" },
+  { labelKey: "nav.gallery", href: "#gallery" },
+  { labelKey: "nav.donate", href: "#donation" },
+  { labelKey: "nav.contact", href: "#contact" },
 ] as const;
 
 export const mobileNavigation = [
-  { label: "मुख्यपृष्ठ", href: "#home" },
-  { label: "आमच्याबद्दल", href: "#about" },
-  { label: "कार्यकारिणी", href: "#committee" },
-  { label: "श्री दुर्गामाता सांस्कृतिक कार्यक्रम", href: "#durga" },
-  { label: "आरती व भजन", href: "#aarti" },
-  { label: "महाप्रसाद", href: "#mahaprasad" },
-  { label: "सामाजिक कार्य", href: "#social" },
-  { label: "फोटो गॅलरी", href: "#gallery" },
-  { label: "योगदान", href: "#donation" },
-  { label: "माता विसर्जन", href: "#visarjan" },
-  { label: "संपर्क", href: "#contact" },
+  { labelKey: "nav.home", href: "#home" },
+  { labelKey: "nav.about", href: "#about" },
+  { labelKey: "nav.committee", href: "#committee" },
+  { labelKey: "nav.durgaCultural", href: "#durga" },
+  { labelKey: "nav.aarti", href: "#aarti" },
+  { labelKey: "nav.mahaprasad", href: "#mahaprasad" },
+  { labelKey: "nav.social", href: "#social" },
+  { labelKey: "nav.gallery", href: "#gallery" },
+  { labelKey: "nav.donate", href: "#donation" },
+  { labelKey: "nav.visarjan", href: "#visarjan" },
+  { labelKey: "nav.contact", href: "#contact" },
 ] as const;
 
 export const aboutContent = {

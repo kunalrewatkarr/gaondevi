@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contactInfo } from "@/data/contact";
+import { useTranslation } from "@/context/LanguageContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -37,6 +38,7 @@ const hasRealMap =
   !contactInfo.mapEmbedUrl.includes("1s0x0%3A0x0");
 
 export function Contact() {
+  const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,16 +52,16 @@ export function Contact() {
     const message = String(data.get("message") ?? "").trim();
 
     const lines = [
-      "*नवयुवक दुर्गा उत्सव मंडळ*",
-      "वेबसाइट संपर्क फॉर्म",
+      `*${t("site.name")}*`,
+      t("contact.whatsappHeader"),
       "------------------------",
       "",
-      `*नाव:* ${name}`,
-      `*फोन:* ${phone}`,
+      `*${t("contact.name")}:* ${name}`,
+      `*${t("contact.phone")}:* ${phone}`,
     ];
 
-    if (email) lines.push(`*ईमेल:* ${email}`);
-    lines.push("", `*संदेश:*`, message);
+    if (email) lines.push(`*${t("contact.email")}:* ${email}`);
+    lines.push("", `*${t("contact.message")}:*`, message);
 
     const whatsappText = encodeURIComponent(lines.join("\n"));
     const whatsappUrl = `https://wa.me/91${contactInfo.whatsapp}?text=${whatsappText}`;
@@ -72,9 +74,9 @@ export function Contact() {
     <section id="contact" className="section-padding section-surface">
       <div className="container-main">
         <SectionHeading
-          kicker="भेट द्या"
-          title={contactInfo.heading}
-          subtitle={contactInfo.subheading}
+          kicker={t("contact.kicker")}
+          title={t("contact.heading")}
+          subtitle={t("contact.subtitle")}
         />
 
         <div className="grid gap-10 lg:grid-cols-2">
@@ -82,12 +84,11 @@ export function Contact() {
             <div className="space-y-5">
               <Card className="p-6">
                 <h3 className="mb-3 font-display text-2xl leading-snug text-maroon">
-                  {contactInfo.locationHeading}
+                  {t("contact.locationHeading")}
                 </h3>
                 <div className="space-y-1 text-base leading-[1.85] text-ink">
-                  {contactInfo.addressLines.map((line) => (
-                    <p key={line}>{line}</p>
-                  ))}
+                  <p>{t("contact.line1")}</p>
+                  <p>{t("contact.line2")}</p>
                 </div>
               </Card>
 
@@ -97,7 +98,7 @@ export function Contact() {
                   className="btn-pill btn-pill-call focus-ring"
                 >
                   <PhoneIcon />
-                  कॉल करा
+                  {t("common.call")}
                 </a>
 
                 {contactInfo.whatsapp ? (
@@ -108,7 +109,7 @@ export function Contact() {
                     className="btn-pill btn-pill-wa focus-ring"
                   >
                     <WhatsAppIcon />
-                    WhatsApp करा
+                    {t("common.whatsapp")}
                   </a>
                 ) : null}
 
@@ -119,7 +120,7 @@ export function Contact() {
                   className="btn-pill btn-pill-gold focus-ring"
                 >
                   <PinIcon />
-                  दिशा पहा
+                  {t("common.directions")}
                 </a>
               </div>
 
@@ -133,14 +134,14 @@ export function Contact() {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="कार्यक्रमाचे ठिकाण — Google Maps"
+                    title={t("a11y.mapTitle")}
                     className="h-[220px] w-full sm:h-[280px]"
                   />
                 ) : (
                   <div className="flex min-h-[200px] flex-col items-center justify-center gap-3 bg-card px-6 py-10 text-center">
-                    <p className="font-display text-xl text-ink">स्थान</p>
+                    <p className="font-display text-xl text-ink">{t("contact.placeFallback")}</p>
                     <p className="max-w-sm text-sm leading-relaxed text-ink-muted">
-                      {contactInfo.address}
+                      {t("contact.address")}
                     </p>
                   </div>
                 )}
@@ -151,7 +152,7 @@ export function Contact() {
                     rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center rounded px-2 text-sm font-medium text-gold-ink hover:underline focus-ring"
                   >
-                    नकाशावर मार्ग पहा →
+                    {t("contact.mapLinkArrow")}
                   </a>
                 </div>
               </div>
@@ -161,12 +162,12 @@ export function Contact() {
           <FadeIn delay={150}>
             <Card className="p-6 md:p-8">
               <h3 className="mb-2 font-display text-2xl text-ink">
-                संदेश पाठवा
+                {t("contact.formTitle")}
               </h3>
               <p className="mb-6 text-sm text-ink-muted">
-                फॉर्म भरल्यानंतर WhatsApp उघडेल. तिथे{" "}
-                <strong className="text-ink">पाठवा</strong> दाबल्यास मंडळाच्या{" "}
-                {contactInfo.whatsapp} या नंबरवर संदेश जाईल.
+                {t("contact.formHelpBefore")}{" "}
+                <strong className="text-ink">{t("contact.formHelpSend")}</strong>{" "}
+                {t("contact.formHelpAfter", { phone: contactInfo.whatsapp })}
               </p>
 
               {submitted ? (
@@ -176,11 +177,12 @@ export function Contact() {
                   aria-live="polite"
                 >
                   <p className="text-lg font-medium text-ink">
-                    WhatsApp उघडले आहे
+                    {t("contact.openedTitle")}
                   </p>
                   <p className="text-sm leading-relaxed text-ink-muted">
-                    कृपया WhatsApp मध्ये <strong>पाठवा</strong> बटण दाबून संदेश
-                    पाठवा. मंडळाचे कार्यकर्ते तुमच्याशी लवकरच संपर्क करतील.
+                    {t("contact.openedBefore")}{" "}
+                    <strong>{t("contact.formHelpSend")}</strong>{" "}
+                    {t("contact.openedAfter")}
                   </p>
                   <Button
                     type="button"
@@ -188,7 +190,7 @@ export function Contact() {
                     onClick={() => setSubmitted(false)}
                     className="mt-2"
                   >
-                    पुन्हा संदेश पाठवा
+                    {t("contact.sendAgain")}
                   </Button>
                 </div>
               ) : (
@@ -198,7 +200,7 @@ export function Contact() {
                       htmlFor="name"
                       className="mb-1.5 block text-sm font-medium text-ink-muted"
                     >
-                      नाव
+                      {t("contact.name")}
                     </label>
                     <input
                       id="name"
@@ -207,7 +209,7 @@ export function Contact() {
                       required
                       autoComplete="name"
                       className="field-input"
-                      placeholder="आपले नाव"
+                      placeholder={t("contact.namePlaceholder")}
                     />
                   </div>
                   <div>
@@ -215,7 +217,7 @@ export function Contact() {
                       htmlFor="phone"
                       className="mb-1.5 block text-sm font-medium text-ink-muted"
                     >
-                      फोन नंबर
+                      {t("contact.phone")}
                     </label>
                     <input
                       id="phone"
@@ -224,7 +226,7 @@ export function Contact() {
                       required
                       autoComplete="tel"
                       className="field-input"
-                      placeholder="९८७६५४३२१०"
+                      placeholder={t("contact.phonePlaceholder")}
                     />
                   </div>
                   <div>
@@ -232,9 +234,9 @@ export function Contact() {
                       htmlFor="email"
                       className="mb-1.5 block text-sm font-medium text-ink-muted"
                     >
-                      ईमेल{" "}
+                      {t("contact.email")}{" "}
                       <span className="font-normal text-ink-muted/60">
-                        (ऐच्छिक)
+                        {t("contact.optional")}
                       </span>
                     </label>
                     <input
@@ -251,7 +253,7 @@ export function Contact() {
                       htmlFor="message"
                       className="mb-1.5 block text-sm font-medium text-ink-muted"
                     >
-                      संदेश
+                      {t("contact.message")}
                     </label>
                     <textarea
                       id="message"
@@ -259,11 +261,11 @@ export function Contact() {
                       rows={4}
                       required
                       className="field-input resize-none"
-                      placeholder="आपला संदेश..."
+                      placeholder={t("contact.messagePlaceholder")}
                     />
                   </div>
                   <Button type="submit" size="lg" className="w-full">
-                    WhatsApp वर संदेश पाठवा
+                    {t("contact.submit")}
                   </Button>
                 </form>
               )}

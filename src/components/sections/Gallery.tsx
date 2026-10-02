@@ -1,6 +1,6 @@
 import { getGalleryImages } from "@/data/gallery";
 import { posterImage } from "@/data/images";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { GalleryHeading } from "@/components/sections/GalleryHeading";
 import { GalleryGrid } from "@/components/ui/GalleryLightbox";
 import { FadeIn } from "@/components/ui/FadeIn";
 
@@ -9,8 +9,10 @@ export function Gallery() {
     {
       id: "taklichi-aai",
       src: posterImage,
-      category: "उत्सव" as const,
-      alt: "झिंगाबाई टाकळीची आई — नवयुवक दुर्गा उत्सव मंडळ",
+      category: "utsav" as const,
+      altKey: "gallery.alt.poster",
+      altIndex: 1,
+      altTotal: 1,
     },
     ...getGalleryImages(),
   ];
@@ -18,12 +20,7 @@ export function Gallery() {
   return (
     <section id="gallery" className="section-padding bg-night">
       <div className="container-main">
-        <SectionHeading
-          kicker="क्षणचित्र"
-          title="फोटो गॅलरी"
-          subtitle="नवरात्र उत्सव, दर्शन आणि सांस्कृतिक कार्यक्रमांचे क्षण"
-          tone="dark"
-        />
+        <GalleryHeading />
 
         <FadeIn>
           <GalleryGrid images={images} />

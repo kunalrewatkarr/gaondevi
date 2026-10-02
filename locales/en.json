@@ -1,0 +1,351 @@
+{
+  "site": {
+    "name": "Navyuvak Durga Utsav Mandal",
+    "location": "Zingabai Takli, Zenda Chowk, Nagpur",
+    "honorific": "The Mother of Zingabai Takli (honoured as the village goddess)",
+    "tagline": "A festival of devotion, culture and unity",
+    "welcome": "A heartfelt welcome to the sacred festival of Navratri",
+    "founded": "Established {year}",
+    "foundedColon": "Established: {year}"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "aarti": "Aarti & Bhajan",
+    "durga": "Shri Durga Mata",
+    "durgaCultural": "Shri Durga Mata Cultural Programme",
+    "events": "Events",
+    "navratri": "Navratri Festival",
+    "committee": "Committee",
+    "mahaprasad": "Mahaprasad",
+    "social": "Social Work",
+    "gallery": "Photo Gallery",
+    "visarjan": "Mata Visarjan",
+    "donate": "Donate",
+    "contact": "Contact"
+  },
+  "common": {
+    "donate": "Donate Now",
+    "darshan": "Darshan",
+    "directions": "Get Directions",
+    "upiDonate": "Donate via UPI App",
+    "copy": "Copy",
+    "copied": "Copied ✓",
+    "ok": "OK",
+    "close": "Close",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "contactCta": "Contact Us"
+  },
+  "a11y": {
+    "skip": "Skip to main content",
+    "language": "Language",
+    "changeLanguage": "Change language",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "hero": "Introduction",
+    "scroll": "Scroll onward",
+    "stats": "Mandal statistics",
+    "backToTop": "Back to top",
+    "whatsapp": "Contact on WhatsApp",
+    "darkOn": "Switch to dark theme",
+    "lightOn": "Switch to light theme",
+    "dark": "Dark theme",
+    "light": "Light theme",
+    "prevPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "photoN": "Photo {n}",
+    "viewPhoto": "View photo",
+    "galleryFilters": "Gallery categories",
+    "lightbox": "Photo gallery — fullscreen view",
+    "mapTitle": "Festival venue — Google Maps",
+    "countdown": "{days} days {hours} hours {minutes} minutes remaining until Navratri"
+  },
+  "logo": {
+    "alt": "{name} — official logo"
+  },
+  "hero": {
+    "programme": "2026 Programme",
+    "portraitAlt": "Shri Durga Mata — Navyuvak Durga Utsav Mandal",
+    "murtiAlt": "Murti of Shri Durga Mata — darshan",
+    "murtiCaption": "Shri Durga Mata",
+    "murtiHint": "Visit here for darshan"
+  },
+  "marquee": {
+    "welcome": "Navratri 2026 — a heartfelt welcome to all devotees",
+    "darshan": "Darshan and prasad of Shri Durga Mata"
+  },
+  "about": {
+    "kicker": "Tradition",
+    "heading": "About Us",
+    "imageAlt": "Murti of Shri Durga Mata — Navyuvak Durga Utsav Mandal",
+    "intro": "Established in 1980, our Navyuvak Durga Utsav Mandal celebrates a grand Navratri festival for Shri Durga Mata every year in the sacred courtyard of Shri Shiv Mandir Maruti Devasthan, Zingabai Takli, Zenda Chowk.",
+    "history": "For over four decades we have carried forward a legacy of devotion, culture and community unity. Through nine days of celebration, we organize daily aarti-bhajan, vibrant garba-dandiya, cultural programs and a grand mahaprasad, filling the entire area with a devotional atmosphere.",
+    "mission": "Bringing together the energy of the youth and the experience of our elders, our mandal reaches new heights every year — and it is only with the support of all of you that this festival keeps growing grander.",
+    "jyotImageAlt": "Akhand Manokamna Jyot and Ghatasthapana — Navyuvak Durga Utsav Mandal",
+    "jyotTitle": "Akhand Manokamna Jyot",
+    "jyotInfo": "Every year, the mandal lights an eternal sacred flame (Akhand Manokamna Jyot) at the feet of Shri Durga Mata — burning continuously for nine days as a symbol of fulfilling devotees' wishes. Devotees from Zingabai Takli and the surrounding area faithfully register their ghat. On the auspicious day of Ghatasthapana, all registered devotees are specially invited, and after a formal puja, the flame is lit by their own sacred hands — a moment that connects every devotee directly to the Goddess's grace.",
+    "jyotSource": "Navratri 2026 — the flame is brought from Shri Renuka Devi Mandir, Mahurgad, Nanded",
+    "jyotDuration": "9 days 9 nights",
+    "jyotDurationLabel": "Eternal flame",
+    "jyotAmount": "₹801",
+    "jyotAmountLabel": "Sankalp amount",
+    "aartiTimeLabel": "Aarti time",
+    "aartiTime": "8:05 in the morning and 8:05 in the evening",
+    "values": {
+      "bhakti": {
+        "title": "Devotion",
+        "description": "Unbroken faith at the feet of Shri Durga Mata"
+      },
+      "sanskriti": {
+        "title": "Culture",
+        "description": "Traditional celebrations and cultural programmes"
+      },
+      "seva": {
+        "title": "Social commitment",
+        "description": "Initiatives that serve the community, and unity"
+      },
+      "youth": {
+        "title": "Youth participation",
+        "description": "The active contribution of the younger generation"
+      },
+      "unity": {
+        "title": "Unity",
+        "description": "A festival that brings the whole neighbourhood together"
+      }
+    }
+  },
+  "durga": {
+    "kicker": "Devotion",
+    "heading": "Shri Durga Mata",
+    "name": "Shri Durga Mata",
+    "intro": "Jagadamba, the radiant form of the primal cosmic power — who destroys evil and protects the virtuous. During this sacred festival of Navratri, the form of Shri Durga Mata is a feast for the eyes; witnessing the divine glow and gracious gaze on her face fills every devotee's heart with devotion. Bowing at the Goddess's feet dispels fear and worry from the mind, bringing a renewed sense of energy and faith.",
+    "significance": "Over the nine days of Navratri, the Goddess's nine forms — Shailaputri, Brahmacharini, Chandraghanta, Kushmanda, Skandamata, Katyayani, Kalaratri, Mahagauri and Siddhidatri — are worshipped in proper ritual order. Each day carries its own significance, color and devotional spirit, filling the whole area with aarti, bhajans and chanting.",
+    "darshan": "The grand and enchanting darshan of Shri Durga Mata at the mandap is open free of charge to all devotees. Darshan and mahaprasad are provided to everyone in an organized, hassle-free manner.",
+    "murtiCredit": "Sculptor: Laxmi Art, Chitar Oli"
+  },
+  "events": {
+    "kicker": "Annual programmes",
+    "title": "Navratri Festival 2026",
+    "subtitle": "The annual programmes and activities of the Navratri festival",
+    "scheduleKicker": "Schedule",
+    "joinTitle": "Take part in the festival",
+    "joinText": "Join in devotion, darshan and social initiatives, and give the festival its meaning.",
+    "activitiesKicker": "Activities",
+    "activitiesTitle": "Annual activities",
+    "activitiesText": "Programmes of devotion, culture and social commitment",
+    "updatedSoon": "Updated details coming soon",
+    "participate": {
+      "attend": "Attend the programmes",
+      "darshan": "Have darshan",
+      "prasad": "Receive mahaprasad",
+      "social": "Support the social initiatives"
+    },
+    "highlights": {
+      "h1": { "title": "Ghatasthapana", "description": "The Goddess's arrival and the eternal flame" },
+      "h2": { "title": "Navratri Festival", "description": "Nine days of devotion and culture" },
+      "h3": { "title": "Aarti & Bhajan", "description": "Daily aarti and bhajan" },
+      "h4": { "title": "Cultural programmes", "description": "Garba, dandiya and cultural activities" },
+      "h5": { "title": "Mahaprasad", "description": "A grand mahaprasad" },
+      "h6": { "title": "Durga Mata Visarjan", "description": "The grand visarjan ceremony" }
+    },
+    "programs": {
+      "p1": { "title": "Shobhayatra", "description": "A grand procession for the arrival of Shri Durga Mata" },
+      "p2": { "title": "Maha Aarti", "description": "Daily maha aarti of Shri Durga Mata" },
+      "p3": { "title": "Bhajan / Kirtan", "description": "Devotional bhajan and kirtan programmes" },
+      "p4": { "title": "Garba / Dandiya", "description": "Garba and dandiya on Navratri nights" },
+      "p5": { "title": "Mahaprasad", "description": "A grand mahaprasad" },
+      "p6": { "title": "Blood donation camp", "description": "A blood donation camp organised for the community" },
+      "p7": { "title": "Health camp", "description": "A health check-up camp" },
+      "p8": { "title": "Visarjan ceremony", "description": "The visarjan ceremony of Shri Durga Mata" }
+    },
+    "schedule": {
+      "e1": {
+        "date": "11 October 2026",
+        "title": "Ghatasthapana and the arrival ceremony of Shri Durga Mata",
+        "time": "Evening",
+        "description": "A grand procession for Ghatasthapana and the arrival of Shri Durga Mata"
+      },
+      "e2": {
+        "date": "12–18 October 2026",
+        "title": "Navratri Festival — daily programme",
+        "time": "",
+        "description": "Aarti, bhajan, cultural programmes and darshan"
+      },
+      "e3": {
+        "date": "19 October 2026",
+        "title": "Mahahavan and grand mahaprasad",
+        "time": "Mahahavan at 6:00 in the morning · Mahaprasad in the evening",
+        "description": "The sacred Mahahavan, and a grand mahaprasad in the evening"
+      },
+      "e4": {
+        "date": "20 October 2026",
+        "title": "Ghat visarjan, blood donation camp and heartfelt Dussehra wishes",
+        "time": "Ghat visarjan at 1:00 in the afternoon",
+        "description": "Heartfelt wishes to all devotees on the occasion of Dussehra"
+      },
+      "e6": {
+        "date": "21 October 2026",
+        "title": "The visarjan ceremony of Shri Durga Mata",
+        "time": "7:00 in the evening",
+        "description": "The visarjan ceremony of Shri Durga Mata"
+      }
+    }
+  },
+  "countdown": {
+    "kicker": "Navratri Festival",
+    "live": "The Navratri festival is underway",
+    "until": "Until Navratri begins",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "experience": {
+    "kicker": "Experience",
+    "title": "The grandeur of the festival",
+    "subtitle": "The mandap, the decorations and a devotional atmosphere",
+    "highlights": {
+      "mandap": { "title": "Grand mandap", "description": "A lively and beautiful mandap decoration" },
+      "lights": { "title": "Lighting", "description": "An atmosphere lit with colourful lights" },
+      "crowd": { "title": "Devotees gathered", "description": "A large gathering of devotees for darshan" },
+      "culture": { "title": "Cultural atmosphere", "description": "Garba, bhajan and cultural programmes" }
+    },
+    "photos": {
+      "mandap": { "alt": "Festival mandap — Navyuvak Durga Utsav Mandal", "caption": "Mandap" },
+      "decor": { "alt": "Mandap decoration — Navyuvak Durga Utsav Mandal", "caption": "Decoration" },
+      "darshan": { "alt": "A view of the Navratri festival — Navyuvak Durga Utsav Mandal", "caption": "Darshan" },
+      "utsav": { "alt": "A grand view of the festival — Navyuvak Durga Utsav Mandal", "caption": "Festival" }
+    }
+  },
+  "stats": {
+    "years": "Years of tradition",
+    "days": "Festival days",
+    "events": "Annual events",
+    "volunteers": "Volunteers / workers"
+  },
+  "committee": {
+    "kicker": "Mandal",
+    "title": "Mandal committee",
+    "subtitle": "Principal office-bearers — President, Secretary, Treasurer and Accountants",
+    "note": "Below are only the principal office-bearers. More than 100 volunteers and workers take an active part in the festival.",
+    "accountants": "Accountants",
+    "members": {
+      "01": { "name": "Ajay Ingole", "role": "President" },
+      "02": { "name": "Bhushan Bhoyar", "role": "Vice President" },
+      "03": { "name": "Atul Achari", "role": "Secretary" },
+      "04": { "name": "Sandeep Doye", "role": "Joint Secretary" },
+      "05": { "name": "Vikas Tabhane", "role": "Treasurer" },
+      "06": { "name": "Nitin Ghotekar", "role": "Joint Treasurer" },
+      "08": { "name": "Sushant Nakhale", "role": "Accountant" },
+      "10": { "name": "Pranit Jivatode", "role": "Accountant" },
+      "07": { "name": "Sudhir Tidke", "role": "Accountant" },
+      "11": { "name": "Harsh Thakre", "role": "Accountant" }
+    }
+  },
+  "social": {
+    "kicker": "Seva",
+    "title": "Social initiatives",
+    "subtitle": "Community programmes the mandal organises every year",
+    "items": {
+      "s1": { "title": "Blood donation camp", "description": "A blood donation camp during the Navratri festival" },
+      "s2": { "title": "Health camp", "description": "A health check-up camp" },
+      "s3": { "title": "Support for orphanages", "description": "Contributions from the mandal to social institutions" },
+      "s4": { "title": "Mahahavan", "description": "Mahahavan during the Navratri festival" },
+      "s5": { "title": "Navkanya bhojan", "description": "A meal offered to nine young girls" },
+      "s6": { "title": "Akhand Manokamna Jyot", "description": "The eternal flame lit with the participation of ghat holders" }
+    }
+  },
+  "gallery": {
+    "kicker": "Moments",
+    "title": "Photo Gallery",
+    "subtitle": "Moments from Navratri, darshan and cultural programmes",
+    "all": "All",
+    "count": "{count} photos",
+    "shown": " · {shown} shown",
+    "more": "View {count} more photos",
+    "categories": {
+      "darshan": "Devi Darshan",
+      "utsav": "Festival",
+      "sanskriti": "Cultural programmes",
+      "mandap": "Mandap",
+      "karyakarte": "Volunteers",
+      "samaj": "Social initiatives"
+    },
+    "alt": {
+      "poster": "The Mother of Zingabai Takli",
+      "darshan": "Darshan of Shri Durga Mata",
+      "utsav": "A view of the Navratri festival",
+      "sanskriti": "Moments from a cultural programme",
+      "mandap": "The festival mandap",
+      "karyakarte": "Workers of the mandal",
+      "samaj": "A social initiative"
+    }
+  },
+  "contact": {
+    "kicker": "Visit",
+    "heading": "Contact",
+    "subtitle": "Visit here for darshan and the festival",
+    "locationHeading": "Navratri festival venue",
+    "line1": "Shri Shiv Mandir Maruti Devasthan",
+    "line2": "Zingabai Takli, Zenda Chowk, Nagpur",
+    "address": "Shri Shiv Mandir Maruti Devasthan, Zingabai Takli, Zenda Chowk, Nagpur",
+    "placeFallback": "Location",
+    "mapLink": "View route on the map",
+    "mapLinkArrow": "View route on the map →",
+    "formTitle": "Send a message",
+    "formHelpBefore": "After you submit the form, WhatsApp will open. Press",
+    "formHelpSend": "send",
+    "formHelpAfter": "there and the message will go to the mandal at {phone}.",
+    "openedTitle": "WhatsApp is open",
+    "openedBefore": "Please press the",
+    "openedAfter": "button in WhatsApp to deliver your message. Mandal workers will contact you soon.",
+    "sendAgain": "Send another message",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "phone": "Phone number",
+    "phonePlaceholder": "9876543210",
+    "email": "Email",
+    "optional": "(optional)",
+    "message": "Message",
+    "messagePlaceholder": "Your message...",
+    "submit": "Send message on WhatsApp",
+    "whatsappHeader": "Website contact form"
+  },
+  "donation": {
+    "kicker": "Donate",
+    "title": "Your contribution to the Goddess's festival",
+    "description": "Your contribution matters for the mandal's festival and social initiatives.",
+    "modalText": "Contribute as you wish toward the mandal's festival and social initiatives.",
+    "otherAmount": "Other amount",
+    "scan": "Scan with any UPI app",
+    "scanPhone": "Scan from your phone",
+    "callWithPhone": "Call · {phone}",
+    "logoAlt": "Mandal logo"
+  },
+  "footer": {
+    "links": "Links",
+    "contact": "Contact",
+    "call": "Call: {phone}",
+    "map": "View route on the map",
+    "connect": "Connect with us",
+    "socialSoon": "Social media links will be available soon.",
+    "rights": "© {year} {name}. All rights reserved.",
+    "madeWith": "A website made with devotion"
+  },
+  "ghat": {
+    "title": "🔔 Ghat Booking Notice",
+    "body": "All devotees wishing to set up a ghat for this year's Navratri festival are requested to register as soon as possible.",
+    "infoLabel": "Information needed for registration",
+    "info": "Your full name, contact number, and address.",
+    "detailsLabel": "Ghat details",
+    "duration": "Flame duration — 9 days 9 nights (continuous lamp)",
+    "amount": "Sankalp amount — ₹801 only",
+    "source": "Flame source: will be brought from Shri Renuka Devi Mandir, Mahurgad, Nanded.",
+    "contact": "Contact: For ghat booking, contact 7769886682.",
+    "deadline": "Last date to register: 5 October 2026"
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { festivalCountdownDate } from "@/data/announcements";
+import { useTranslation } from "@/context/LanguageContext";
 import { formatStatNumber } from "@/lib/numerals";
 
 interface Remaining {
@@ -33,6 +34,8 @@ function sameRemaining(a: Remaining, b: Remaining): boolean {
 }
 
 export function FestivalCountdown() {
+  const { t, language } = useTranslation();
+  const numerals = language === "en" ? "latin" : "devanagari";
   const targetMs = new Date(`${festivalCountdownDate}T00:00:00+05:30`).getTime();
   const [remaining, setRemaining] = useState<Remaining | null | "live">(null);
   const [ready, setReady] = useState(false);
@@ -121,10 +124,10 @@ export function FestivalCountdown() {
           role="status"
         >
           <p className="text-xs font-semibold tracking-[0.22em] text-saffron">
-            नवरात्र उत्सव
+            {t("countdown.kicker")}
           </p>
           <p className="mt-2 font-display text-xl sm:text-2xl">
-            नवरात्र उत्सव सुरू आहे
+            {t("countdown.live")}
           </p>
         </div>
       ) : remaining ? (
@@ -132,18 +135,22 @@ export function FestivalCountdown() {
           className="overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-br from-card via-paper to-saffron/15 px-3 py-5 text-center shadow-md shadow-vermillion/10 sm:px-8 sm:py-6"
           role="timer"
           aria-live="off"
-          aria-label={`नवरात्र उत्सवाला ${remaining.days} दिवस ${remaining.hours} तास ${remaining.minutes} मिनिटे उरले आहेत`}
+          aria-label={t("a11y.countdown", {
+            days: remaining.days,
+            hours: remaining.hours,
+            minutes: remaining.minutes,
+          })}
         >
           <p className="px-1 text-xs font-semibold leading-relaxed text-gold-ink">
-            नवरात्र उत्सवाला सुरुवात होण्यास
+            {t("countdown.until")}
           </p>
           <div className="mt-4 flex items-stretch justify-center gap-1 sm:mt-5 sm:gap-3">
             {(
               [
-                { label: "दिवस", value: remaining.days },
-                { label: "तास", value: remaining.hours },
-                { label: "मिनिटे", value: remaining.minutes },
-                { label: "सेकंद", value: remaining.seconds },
+                { label: t("countdown.days"), value: remaining.days },
+                { label: t("countdown.hours"), value: remaining.hours },
+                { label: t("countdown.minutes"), value: remaining.minutes },
+                { label: t("countdown.seconds"), value: remaining.seconds },
               ] as const
             ).map((unit, index, list) => (
               <div
@@ -152,7 +159,7 @@ export function FestivalCountdown() {
               >
                 <div className="min-w-0 flex-1 rounded-2xl border border-vermillion/12 bg-card px-1.5 py-3 shadow-sm sm:min-w-[4.75rem] sm:flex-none sm:px-3">
                   <p className="font-display text-xl text-gold-ink tabular-nums sm:text-4xl">
-                    {formatStatNumber(unit.value)}
+                    {formatStatNumber(unit.value, numerals)}
                   </p>
                   <p className="mt-1 text-[0.65rem] font-medium leading-snug text-ink-muted sm:text-xs">
                     {unit.label}

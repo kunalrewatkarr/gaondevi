@@ -1,6 +1,10 @@
+"use client";
+
 import { contactInfo } from "@/data/contact";
+import { useTranslation } from "@/context/LanguageContext";
 
 export function WhatsAppFab() {
+  const { t } = useTranslation();
   if (!contactInfo.whatsapp) return null;
 
   return (
@@ -9,7 +13,7 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-[max(5rem,calc(env(safe-area-inset-bottom)+4.5rem))] left-[max(1rem,env(safe-area-inset-left))] z-50 flex h-12 w-12 items-center justify-center rounded-full bg-whatsapp text-xl text-cream shadow-lg transition-transform duration-300 hover:scale-105 focus-ring-dark sm:bottom-[max(2rem,env(safe-area-inset-bottom))] sm:left-[max(2rem,env(safe-area-inset-left))]"
-      aria-label="WhatsApp वर संपर्क करा"
+      aria-label={t("a11y.whatsapp")}
     >
       <svg
         viewBox="0 0 24 24"

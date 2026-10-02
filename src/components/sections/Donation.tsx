@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { QRCodeSVG } from "qrcode.react";
 import { contactInfo } from "@/data/contact";
+import { useTranslation } from "@/context/LanguageContext";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 
@@ -14,6 +15,7 @@ const NOTE = "Navratri Yogdan";
 const AMOUNTS = [101, 251, 501, 1101];
 
 export function Donation() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -61,13 +63,13 @@ export function Donation() {
         <FadeIn>
           <div className="mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-gold/30 bg-gradient-to-br from-vermillion via-maroon to-wine px-5 py-9 text-center text-cream shadow-xl shadow-vermillion/25 sm:px-10 sm:py-12">
             <p className="text-xs font-semibold text-saffron">
-              योगदान
+              {t("donation.kicker")}
             </p>
             <h2 className="mt-4 font-display text-2xl leading-snug sm:text-3xl md:text-4xl">
-              देवीच्या उत्सवासाठी आपले योगदान
+              {t("donation.title")}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-cream/85">
-              मंडळाच्या उत्सव व सामाजिक उपक्रमांसाठी आपले योगदान महत्त्वाचे आहे.
+              {t("donation.description")}
             </p>
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Button
@@ -76,13 +78,13 @@ export function Donation() {
                 onClick={() => setOpen(true)}
                 className="min-h-14 w-full px-10 text-xl shadow-[0_10px_32px_-8px_rgba(212,165,55,0.85)] sm:min-w-[16rem] sm:w-auto"
               >
-                योगदान द्या
+                {t("common.donate")}
               </Button>
               <a
                 href={`tel:${contactInfo.phone}`}
                 className="inline-flex min-h-12 w-full items-center justify-center rounded-full border-2 border-saffron/70 px-8 py-4 text-lg font-semibold tracking-wide text-cream transition-all duration-300 hover:border-saffron hover:bg-saffron/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron focus-visible:ring-offset-2 focus-visible:ring-offset-maroon sm:w-auto"
               >
-                संपर्क करा
+                {t("common.contactCta")}
               </a>
             </div>
           </div>
@@ -99,24 +101,24 @@ export function Donation() {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <p className="text-xs font-semibold text-gold-ink">
-                योगदान
+                {t("donation.kicker")}
               </p>
               <h3 id={titleId} className="mt-2 font-display text-xl leading-snug text-ink sm:text-2xl">
-                देवीच्या उत्सवासाठी आपले योगदान
+                {t("donation.title")}
               </h3>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ivory text-ink hover:bg-paper focus-ring"
-              aria-label="बंद करा"
+              aria-label={t("common.close")}
             >
               ✕
             </button>
           </div>
 
           <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-            मंडळाच्या उत्सव व सामाजिक उपक्रमांसाठी आपल्या इच्छेनुसार योगदान द्या.
+            {t("donation.modalText")}
           </p>
 
           <div className="mt-6 space-y-5">
@@ -140,8 +142,8 @@ export function Donation() {
                   type="number"
                   value={customAmount}
                   onChange={handleCustomAmountChange}
-                  placeholder="इतर रक्कम"
-                  className="w-28 rounded-full border-2 border-gold/50 px-4 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                  placeholder={t("donation.otherAmount")}
+                  className="w-36 rounded-full border-2 border-gold/50 px-4 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                 />
               </div>
             </div>
@@ -159,7 +161,7 @@ export function Donation() {
                   <div className="rounded-full bg-white p-1.5 shadow-lg">
                     <Image
                       src="/images/logo/mandal-logo.png"
-                      alt="Mandal Logo"
+                      alt={t("donation.logoAlt")}
                       width={37}
                       height={37}
                       className="rounded-full"
@@ -168,7 +170,7 @@ export function Donation() {
                 </div>
               </div>
               <p className="mt-3 text-sm font-medium text-ink">
-                कोणत्याही UPI ॲपने स्कॅन करा
+                {t("donation.scan")}
               </p>
             </div>
 
@@ -176,11 +178,11 @@ export function Donation() {
               href={upiLink}
               className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-gold px-8 py-4 text-lg font-semibold text-night shadow-[0_10px_32px_-8px_rgba(212,165,55,0.85)] transition-all duration-150 hover:scale-[1.02] hover:shadow-[0_12px_40px_-8px_rgba(212,165,55,0.95)] active:scale-[0.98] sm:hidden focus-ring"
             >
-              UPI ॲपने योगदान द्या
+              {t("common.upiDonate")}
             </a>
 
             <div className="hidden sm:block text-center text-sm text-ink-muted">
-              मोबाईलवरून स्कॅन करा
+              {t("donation.scanPhone")}
             </div>
 
             <div className="rounded-2xl bg-ivory px-4 py-3 ring-1 ring-ink/8">
@@ -190,7 +192,7 @@ export function Donation() {
               </p>
               <div className="mt-3">
                 <Button type="button" size="sm" onClick={copyUpi} className="w-full sm:w-auto">
-                  {copied ? "कॉपी झाले ✓" : "कॉपी करा"}
+                  {copied ? t("common.copied") : t("common.copy")}
                 </Button>
               </div>
             </div>
@@ -200,7 +202,7 @@ export function Donation() {
                 href={`tel:${contactInfo.phone}`}
                 className="btn-pill btn-pill-call focus-ring"
               >
-                कॉल करा · {contactInfo.phone}
+                {t("donation.callWithPhone", { phone: contactInfo.phone })}
               </a>
               <a
                 href={`https://wa.me/91${contactInfo.phone}`}
@@ -208,7 +210,7 @@ export function Donation() {
                 rel="noopener noreferrer"
                 className="btn-pill btn-pill-wa focus-ring"
               >
-                WhatsApp करा
+                {t("common.whatsapp")}
               </a>
             </div>
           </div>
@@ -218,7 +220,7 @@ export function Donation() {
             onClick={() => setOpen(false)}
             className="mt-6 w-full rounded-full border border-ink/15 px-4 py-3.5 text-sm font-medium text-ink hover:bg-ivory focus-ring"
           >
-            बंद करा
+            {t("common.close")}
           </button>
         </div>
       </dialog>

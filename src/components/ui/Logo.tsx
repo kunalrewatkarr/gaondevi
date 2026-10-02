@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { logoImage } from "@/data/branding";
-import { siteConfig } from "@/data/site";
+import { useTranslation } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
 const sizes = {
@@ -26,7 +28,9 @@ export function Logo({
   labelClassName,
   variant = "light",
 }: LogoProps) {
+  const { t } = useTranslation();
   const s = sizes[size];
+  const name = t("site.name");
 
   return (
     <div className={cn("flex items-center gap-3", className)}>
@@ -42,7 +46,7 @@ export function Logo({
       >
         <Image
           src={logoImage}
-          alt={`${siteConfig.name} — अधिकृत लोगो`}
+          alt={t("logo.alt", { name })}
           width={s.img}
           height={s.img}
           className="h-full w-full object-cover [image-rendering:-webkit-optimize-contrast]"
@@ -54,9 +58,9 @@ export function Logo({
       {showLabel && (
         <div className={labelClassName}>
           <p className="font-display text-base leading-tight md:text-lg">
-            {siteConfig.name}
+            {name}
           </p>
-          <p className="text-xs text-gold-ink">{siteConfig.location}</p>
+          <p className="text-xs text-gold-ink">{t("site.location")}</p>
         </div>
       )}
     </div>

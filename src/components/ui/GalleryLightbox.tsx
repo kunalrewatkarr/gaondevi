@@ -4,8 +4,24 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import type { GalleryImage } from "@/data/gallery";
+import { useTranslation, type Language } from "@/context/LanguageContext";
+import { formatStatNumber } from "@/lib/numerals";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+
+const ALL = "all";
+
+function galleryImageAlt(
+  image: GalleryImage,
+  t: (key: string, vars?: Record<string, string | number>) => string,
+  language: Language
+) {
+  const label = t(image.altKey ?? `gallery.alt.${image.category}`);
+  const numerals = language === "en" ? "latin" : "devanagari";
+  const count =
+    image.altTotal > 1 ? ` ${formatStatNumber(image.altIndex, numerals)}` : "";
+  return `${label}${count} — ${t("site.name")}`;
+}
 
 const PAGE_SIZE = 12;
 
@@ -24,7 +40,9 @@ export function GalleryLightbox({
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const touchStartRef = useRef<number | null>(null);
+  const { t, language } = useTranslation();
   const current = images[index];
+  const currentAlt = current ? galleryImageAlt(current, t, language) : "";
 
   const goNext = useCallback(() => {
     setIndex((i) => (i + 1) % images.length);
@@ -110,7 +128,7 @@ export function GalleryLightbox({
       className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-night/96 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
-      aria-label="फोटो गॅलरी — पूर्णस्क्रीन दृश्य"
+      aria-label={t("a11y.lightbox")}
       onClick={onClose}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
@@ -122,7 +140,7 @@ export function GalleryLightbox({
           onClose();
         }}
         className="absolute right-3 top-[max(1rem,env(safe-area-inset-top))] z-10 flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-cream/20 focus-ring-dark sm:right-4 sm:top-4"
-        aria-label="बंद करा"
+        aria-label={t("common.close")}
       >
         <svg
           width="20"
@@ -144,7 +162,7 @@ export function GalleryLightbox({
           goPrev();
         }}
         className="absolute left-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-cream/10 text-2xl text-cream transition-colors hover:bg-cream/20 focus-ring-dark md:left-6"
-        aria-label="मागील फोटो"
+        aria-label={t("a11y.prevPhoto")}
       >
         <svg
           width="24"
@@ -167,7 +185,7 @@ export function GalleryLightbox({
         <div className="relative mx-auto w-fit max-w-[90vw] overflow-hidden rounded-2xl ring-1 ring-saffron/30 sm:rounded-3xl">
           <Image
             src={current.src}
-            alt={current.alt}
+            alt={currentAlt}
             width={1200}
             height={900}
             sizes="90vw"
@@ -177,9 +195,9 @@ export function GalleryLightbox({
         </div>
         <div className="mt-4 shrink-0 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center">
           <p className="text-base font-medium leading-snug text-cream sm:text-lg">
-            {current.alt}
+            {currentAlt}
           </p>
-          <p className="mt-1 text-sm text-saffron">{current.category}</p>
+          <p className="mt-1 text-sm text-saffron">{t(`gallery.categories.${current.category}`)}</p>
           <p className="mt-2 text-sm text-cream/65" aria-live="polite">
             {index + 1} / {images.length}
           </p>
@@ -192,7 +210,7 @@ export function GalleryLightbox({
           goNext();
         }}
         className="absolute right-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-cream/10 text-2xl text-cream transition-colors hover:bg-cream/20 focus-ring-dark md:right-6"
-        aria-label="पुढील फोटो"
+        aria-label={t("a11y.nextPhoto")}
       >
         <svg
           width="24"
@@ -217,19 +235,20 @@ interface GalleryGridProps {
 }
 
 export function GalleryGrid({ images }: GalleryGridProps) {
-  const [activeCategory, setActiveCategory] = useState<string>("सर्व");
+  const { t, language } = useTranslation();
+  const [activeCategory, setActiveCategory] = useState<string>(ALL);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   const categories = useMemo(
-    () => ["सर्व", ...new Set(images.map((i) => i.category))],
+    () => [ALL, ...new Set(images.map((i) => i.category))],
     [images]
   );
 
   const filtered = useMemo(
     () =>
-      activeCategory === "सर्व"
+      activeCategory === ALL
         ? images
         : images.filter((i) => i.category === activeCategory),
     [images, activeCategory]
@@ -252,7 +271,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
       <div
         className="mb-8 flex flex-wrap justify-center gap-2"
         role="group"
-        aria-label="गॅलरी श्रेणी"
+        aria-label={t("a11y.galleryFilters")}
       >
         {categories.map((cat) => {
           const isActive = activeCategory === cat;
@@ -269,8 +288,8 @@ export function GalleryGrid({ images }: GalleryGridProps) {
                   : "border border-saffron/45 bg-transparent text-cream/75 hover:border-saffron hover:text-cream"
               )}
             >
-              {cat}
-              {cat !== "सर्व" && (
+              {cat === ALL ? t("gallery.all") : t(`gallery.categories.${cat}`)}
+              {cat !== ALL && (
                 <span className="ml-1.5 opacity-70">
                   ({images.filter((i) => i.category === cat).length})
                 </span>
@@ -281,8 +300,8 @@ export function GalleryGrid({ images }: GalleryGridProps) {
       </div>
 
       <p className="mb-6 text-center text-sm text-cream/65">
-        {filtered.length} फोटो
-        {hasMore && ` · ${visible.length} दाखवले`}
+        {t("gallery.count", { count: filtered.length })}
+        {hasMore && t("gallery.shown", { shown: visible.length })}
       </p>
 
       <div className="gallery-grid-uniform gallery-filter-transition">
@@ -298,7 +317,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
 
             <Image
               src={image.src}
-              alt={image.alt}
+              alt={galleryImageAlt(image, t, language)}
               width={800}
               height={600}
               loading="lazy"
@@ -318,7 +337,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
               type="button"
               onClick={() => setLightboxIndex(filtered.indexOf(image))}
               className="gallery-eye-btn focus-ring-dark"
-              aria-label="फोटो पहा"
+              aria-label={t("a11y.viewPhoto")}
             >
               <svg
                 width="20"
@@ -345,7 +364,9 @@ export function GalleryGrid({ images }: GalleryGridProps) {
             variant="outline-light"
             onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
           >
-            आणखी {Math.min(PAGE_SIZE, filtered.length - visibleCount)} फोटो पहा
+            {t("gallery.more", {
+              count: Math.min(PAGE_SIZE, filtered.length - visibleCount),
+            })}
           </Button>
         </div>
       )}

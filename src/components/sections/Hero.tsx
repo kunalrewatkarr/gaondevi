@@ -1,19 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import { siteConfig } from "@/data/site";
-import { durgaImages } from "@/data/images";
+import { useTranslation } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/Button";
 
-export function Hero() {
+interface HeroProps {
+  heroSrc: string;
+  portraitSrc: string;
+}
+
+export function Hero({ heroSrc, portraitSrc }: HeroProps) {
+  const { t } = useTranslation();
   return (
     <section
       id="home"
       className="relative flex min-h-[100svh] flex-col justify-end overflow-x-hidden"
-      aria-label="मुख्य परिचय"
+      aria-label={t("a11y.hero")}
     >
       <div className="absolute inset-0 overflow-hidden">
         <Image
-          src={durgaImages.hero}
-          alt="श्री दुर्गा माता — नवयुवक दुर्गा उत्सव मंडळ"
+          src={heroSrc}
+          alt={t("hero.portraitAlt")}
           fill
           priority
           sizes="100vw"
@@ -37,28 +45,28 @@ export function Hero() {
         <div className="grid items-end gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="max-w-3xl">
             <p className="animate-fade-up mb-4 max-w-full rounded-2xl border border-gold/35 bg-night/55 px-3.5 py-2 text-sm leading-relaxed text-rose-gold backdrop-blur-sm sm:inline-block sm:rounded-full sm:px-4">
-              {siteConfig.honorific}
+              {t("site.honorific")}
             </p>
 
             <p className="animate-fade-up animation-delay-200 text-sm leading-relaxed text-cream/70">
-              स्थापना {siteConfig.foundedYear} · {siteConfig.location}
+              {t("site.founded", { year: siteConfig.foundedYear })} · {t("site.location")}
             </p>
 
             <h1 className="animate-fade-up animation-delay-200 mt-3 font-display text-[1.85rem] leading-[1.4] text-cream sm:text-4xl sm:leading-[1.35] md:text-5xl md:leading-[1.3] lg:text-6xl lg:leading-[1.28]">
-              {siteConfig.name}
+              {t("site.name")}
             </h1>
 
             <p className="animate-fade-up animation-delay-400 mt-5 font-display text-lg leading-[1.55] text-saffron sm:text-xl md:text-2xl lg:text-3xl">
-              {siteConfig.tagline}
+              {t("site.tagline")}
             </p>
 
             <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/85 sm:mt-6 sm:text-lg">
-              {siteConfig.welcomeMessage}
+              {t("site.welcome")}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
               <Button href="#durga" size="lg" className="w-full sm:w-auto">
-                दर्शन
+                {t("common.darshan")}
               </Button>
               <Button
                 href="#events"
@@ -66,7 +74,7 @@ export function Hero() {
                 size="lg"
                 className="w-full sm:w-auto"
               >
-                २०२६ चा कार्यक्रम
+                {t("hero.programme")}
               </Button>
             </div>
           </div>
@@ -79,8 +87,8 @@ export function Hero() {
               />
               <div className="relative aspect-[3/4] w-56 overflow-hidden rounded-[2rem] border-2 border-gold/50 shadow-2xl shadow-night/50 ring-4 ring-gold/20 sm:w-64 lg:w-72">
                 <Image
-                  src={durgaImages.main}
-                  alt="श्री दुर्गा मातेची मूर्ती — दर्शन"
+                  src={portraitSrc}
+                  alt={t("hero.murtiAlt")}
                   fill
                   sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 288px"
                   priority
@@ -89,10 +97,10 @@ export function Hero() {
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/85 to-transparent p-4 pt-12">
                   <p className="text-center font-display text-lg text-gold">
-                    श्री दुर्गामाता
+                    {t("hero.murtiCaption")}
                   </p>
                   <p className="text-center text-xs text-cream/70">
-                    दर्शनासाठी येथे भेट द्या
+                    {t("hero.murtiHint")}
                   </p>
                 </div>
               </div>
@@ -104,7 +112,7 @@ export function Hero() {
       <a
         href="#about"
         className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 rounded-full p-3 text-cream/70 transition-colors hover:text-cream focus-ring-dark sm:bottom-6"
-        aria-label="पुढे स्क्रोल करा"
+        aria-label={t("a11y.scroll")}
       >
         <span className="block animate-float text-2xl" aria-hidden="true">
           ↓

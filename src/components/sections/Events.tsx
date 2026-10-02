@@ -1,15 +1,21 @@
+"use client";
+
 import {
   festivalHighlights,
   navratriEvents,
-  participationItems,
   programs,
 } from "@/data/events";
+import { useTranslation } from "@/context/LanguageContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EventCard } from "@/components/ui/EventCard";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { FestivalCountdown } from "../ui/FestivalCountdown";
 
+const PARTICIPATION_KEYS = ["attend", "darshan", "prasad", "social"] as const;
+
 export function Events() {
+  const { t } = useTranslation();
+
   return (
     <section id="events" className="section-padding relative overflow-hidden events-surface">
       <div
@@ -23,9 +29,9 @@ export function Events() {
 
       <div className="container-main relative">
         <SectionHeading
-          kicker="वार्षिक उपक्रम"
-          title="नवरात्र उत्सव २०२६"
-          subtitle="नवरात्र उत्सवातील वार्षिक कार्यक्रम व उपक्रम"
+          kicker={t("events.kicker")}
+          title={t("events.title")}
+          subtitle={t("events.subtitle")}
         />
 
         <FadeIn>
@@ -42,10 +48,10 @@ export function Events() {
                   {item.icon}
                 </span>
                 <h3 className="font-display text-lg leading-snug text-ink">
-                  {item.title}
+                  {t(`events.highlights.${item.id}.title`)}
                 </h3>
                 <p className="text-xs leading-relaxed text-ink-muted">
-                  {item.description}
+                  {t(`events.highlights.${item.id}.description`)}
                 </p>
               </div>
             </FadeIn>
@@ -56,10 +62,10 @@ export function Events() {
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold text-gold-ink">
-                वेळापत्रक
+                {t("events.scheduleKicker")}
               </p>
               <h3 className="mt-2 font-display text-2xl text-ink sm:text-3xl">
-                कार्यक्रम
+                {t("nav.events")}
               </h3>
             </div>
             <div
@@ -91,14 +97,13 @@ export function Events() {
         <FadeIn>
           <div className="mb-16 overflow-hidden rounded-[2rem] border border-gold/25 bg-gradient-to-br from-card via-paper to-saffron/10 p-6 shadow-sm shadow-ink/5 sm:p-8 md:mb-20">
             <h3 className="font-display text-2xl text-ink sm:text-3xl">
-              उत्सवात सहभागी व्हा
+              {t("events.joinTitle")}
             </h3>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted sm:text-base">
-              भक्ती, दर्शन आणि सामाजिक उपक्रमांमध्ये सहभागी होऊन उत्सवाला
-              अर्थपूर्ण बनवा.
+              {t("events.joinText")}
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {participationItems.map((item) => (
+              {PARTICIPATION_KEYS.map((item) => (
                 <li
                   key={item}
                   className="flex items-start gap-3 rounded-2xl border border-vermillion/10 bg-ivory/60 px-4 py-3 text-sm text-ink"
@@ -112,7 +117,7 @@ export function Events() {
                       <path d="M8.2 20.2h7.6c.2.8.1 1.5-.2 2.1H8.4c-.3-.6-.4-1.3-.2-2.1z" />
                     </svg>
                   </span>
-                  <span>{item}</span>
+                  <span>{t(`events.participate.${item}`)}</span>
                 </li>
               ))}
             </ul>
@@ -122,13 +127,13 @@ export function Events() {
         <div className="overflow-hidden rounded-[2rem] border border-vermillion/15 bg-gradient-to-b from-wine/[0.04] via-paper/80 to-saffron/[0.08] p-5 sm:p-8">
           <div className="mb-8">
             <p className="text-xs font-semibold text-gold-ink">
-              उपक्रम
+              {t("events.activitiesKicker")}
             </p>
             <h3 className="mt-2 font-display text-2xl text-ink sm:text-3xl">
-              वार्षिक उपक्रम
+              {t("events.activitiesTitle")}
             </h3>
             <p className="mt-2 max-w-2xl text-sm text-ink-muted sm:text-base">
-              भक्ती, संस्कृती आणि सामाजिक बांधिलकीचे विविध उपक्रम
+              {t("events.activitiesText")}
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -151,10 +156,10 @@ export function Events() {
                     {program.icon}
                   </span>
                   <h4 className="mt-4 font-display text-xl leading-snug text-ink">
-                    {program.title}
+                    {t(`events.programs.${program.id}.title`)}
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                    {program.description}
+                    {t(`events.programs.${program.id}.description`)}
                   </p>
                 </article>
               </FadeIn>

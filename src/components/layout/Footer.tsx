@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { contactInfo, socialLinks } from "@/data/contact";
 import { mobileNavigation, siteConfig } from "@/data/site";
+import { useTranslation } from "@/context/LanguageContext";
 import { Logo } from "@/components/ui/Logo";
 
 function InstagramIcon() {
@@ -59,6 +62,7 @@ const socialItems = [
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
   const year = new Date().getFullYear();
   const visibleSocial = socialItems.filter((item) => Boolean(item.href));
 
@@ -69,23 +73,23 @@ export function Footer() {
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <Logo size="lg" variant="light" className="md:[&>div:first-child]:h-36 md:[&>div:first-child]:w-36" />
             <h3 className="mt-5 font-display text-xl leading-snug md:text-2xl">
-              {siteConfig.name}
+              {t("site.name")}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gold/90">
-              {siteConfig.honorific}
+              {t("site.honorific")}
             </p>
             <p className="mt-3 text-sm leading-relaxed text-cream/70">
-              {contactInfo.addressLines[0]}
+              {t("contact.line1")}
               <br />
-              {contactInfo.addressLines[1]}
+              {t("contact.line2")}
             </p>
             <p className="mt-2 text-sm text-gold">
-              स्थापना: {siteConfig.foundedYear}
+              {t("site.foundedColon", { year: siteConfig.foundedYear })}
             </p>
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-gold">दुवे</h4>
+            <h4 className="mb-4 text-sm font-semibold text-gold">{t("footer.links")}</h4>
             <ul className="space-y-1">
               {mobileNavigation.map((item) => (
                 <li key={item.href}>
@@ -93,7 +97,7 @@ export function Footer() {
                     href={item.href}
                     className="inline-flex min-h-11 items-center rounded text-sm text-cream/70 transition-colors hover:text-gold focus-ring-dark"
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -101,14 +105,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-gold">संपर्क</h4>
+            <h4 className="mb-4 text-sm font-semibold text-gold">{t("footer.contact")}</h4>
             <ul className="space-y-3 text-sm text-cream/70">
               <li>
                 <a
                   href={`tel:${contactInfo.phone}`}
                   className="rounded transition-colors hover:text-gold focus-ring-dark"
                 >
-                  कॉल: {contactInfo.phone}
+                  {t("footer.call", { phone: contactInfo.phone })}
                 </a>
               </li>
               <li>
@@ -128,7 +132,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="rounded transition-colors hover:text-gold focus-ring-dark"
                 >
-                  नकाशावर मार्ग पहा
+                  {t("footer.map")}
                 </a>
               </li>
               <li>
@@ -136,19 +140,19 @@ export function Footer() {
                   href="#donation"
                   className="rounded transition-colors hover:text-gold focus-ring-dark"
                 >
-                  योगदान
+                  {t("nav.donate")}
                 </Link>
               </li>
               <li className="leading-relaxed">
-                {contactInfo.addressLines[0]}
+                {t("contact.line1")}
                 <br />
-                {contactInfo.addressLines[1]}
+                {t("contact.line2")}
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-gold">आमच्याशी जोडा</h4>
+            <h4 className="mb-4 text-sm font-semibold text-gold">{t("footer.connect")}</h4>
             {visibleSocial.length > 0 ? (
               <div className="flex flex-wrap gap-3">
                 {visibleSocial.map((item) => (
@@ -166,7 +170,7 @@ export function Footer() {
               </div>
             ) : (
               <p className="text-sm leading-relaxed text-cream/65">
-                सोशल मीडिया दुवे लवकरच उपलब्ध होतील.
+                {t("footer.socialSoon")}
               </p>
             )}
           </div>
@@ -174,9 +178,9 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream/10 pt-8 text-center sm:flex-row sm:text-left">
           <p className="text-sm text-cream/55">
-            © {year} {siteConfig.name}. सर्व हक्क राखीव.
+            {t("footer.rights", { year, name: t("site.name") })}
           </p>
-          <p className="text-xs text-cream/45">श्रद्धेने तयार केलेले संकेतस्थळ</p>
+          <p className="text-xs text-cream/45">{t("footer.madeWith")}</p>
         </div>
       </div>
     </footer>

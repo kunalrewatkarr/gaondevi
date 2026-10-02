@@ -1,16 +1,21 @@
+"use client";
+
 import { socialInitiatives } from "@/data/social-work";
+import { useTranslation } from "@/context/LanguageContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Card } from "@/components/ui/Card";
 
 export function SocialWork() {
+  const { t } = useTranslation();
+
   return (
     <section id="social" className="section-padding section-surface-alt">
       <div className="container-main">
         <SectionHeading
-          kicker="समाजसेवा"
-          title="सामाजिक उपक्रम"
-          subtitle="मंडळाकडून दरवर्षी राबवले जाणारे समाजोपयोगी उपक्रम"
+          kicker={t("social.kicker")}
+          title={t("social.title")}
+          subtitle={t("social.subtitle")}
         />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -25,9 +30,9 @@ export function SocialWork() {
                   {item.icon}
                 </span>
                 <div>
-                  <h3 className="font-display text-xl text-ink">{item.title}</h3>
+                  <h3 className="font-display text-xl text-ink">{t(`social.items.${item.id}.title`)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                    {item.description}
+                    {t(`social.items.${item.id}.description`)}
                   </p>
                 </div>
               </Card>

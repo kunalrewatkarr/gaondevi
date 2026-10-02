@@ -1,10 +1,12 @@
+"use client";
+
 import Image from "next/image";
-import { durgaContent } from "@/data/festival";
-import { durgaImages } from "@/data/images";
+import { useTranslation } from "@/context/LanguageContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FadeIn } from "@/components/ui/FadeIn";
 
-export function DurgaMaa() {
+export function DurgaMaa({ imageSrc }: { imageSrc: string }) {
+  const { t } = useTranslation();
   return (
     <section
       id="durga"
@@ -16,7 +18,7 @@ export function DurgaMaa() {
       />
 
       <div className="container-main relative">
-        <SectionHeading kicker="भक्ती" title={durgaContent.heading} tone="dark" />
+        <SectionHeading kicker={t("durga.kicker")} title={t("durga.heading")} tone="dark" />
 
         <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2">
           <FadeIn>
@@ -27,8 +29,8 @@ export function DurgaMaa() {
               />
               <div className="relative aspect-square overflow-hidden rounded-full border-4 border-gold/40 shadow-2xl shadow-night/40">
                 <Image
-                  src={durgaImages.secondary}
-                  alt={durgaContent.name}
+                  src={imageSrc}
+                  alt={t("durga.name")}
                   fill
                   sizes="(max-width: 1024px) 90vw, 45vw"
                   className="object-cover object-[center_12%]"
@@ -40,21 +42,21 @@ export function DurgaMaa() {
           <FadeIn delay={150}>
             <div className="space-y-5 sm:space-y-6">
               <h3 className="font-display text-2xl leading-snug text-gold sm:text-4xl">
-                {durgaContent.name}
+                {t("durga.name")}
               </h3>
               <p className="text-base leading-relaxed text-cream/90 sm:text-xl">
-                {durgaContent.intro}
+                {t("durga.intro")}
               </p>
               <p className="leading-relaxed text-cream/70">
-                {durgaContent.significance}
+                {t("durga.significance")}
               </p>
               <div className="rounded-3xl border border-gold/25 bg-cream/5 p-5 backdrop-blur-sm sm:p-6">
-                <h4 className="mb-2 font-display text-xl text-saffron sm:text-2xl">दर्शन</h4>
+                <h4 className="mb-2 font-display text-xl text-saffron sm:text-2xl">{t("common.darshan")}</h4>
                 <p className="leading-relaxed text-cream/80">
-                  {durgaContent.darshan}
+                  {t("durga.darshan")}
                 </p>
               </div>
-              <p className="text-sm leading-relaxed text-cream/60">{durgaContent.murtiCredit}</p>
+              <p className="text-sm leading-relaxed text-cream/60">{t("durga.murtiCredit")}</p>
             </div>
           </FadeIn>
         </div>

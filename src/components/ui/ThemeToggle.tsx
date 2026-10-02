@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "@/context/LanguageContext";
 import { applyTheme, getPreferredTheme, type ThemeMode } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,7 @@ function MoonIcon() {
 }
 
 export function ThemeToggle({ className, onDark = false }: ThemeToggleProps) {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState<ThemeMode>("light");
   const [ready, setReady] = useState(false);
 
@@ -59,8 +61,8 @@ export function ThemeToggle({ className, onDark = false }: ThemeToggleProps) {
           : "text-ink hover:bg-vermillion/10",
         className
       )}
-      aria-label={theme === "light" ? "डार्क थीम चालू करा" : "लाइट थीम चालू करा"}
-      title={theme === "light" ? "डार्क थीम" : "लाइट थीम"}
+      aria-label={theme === "light" ? t("a11y.darkOn") : t("a11y.lightOn")}
+      title={theme === "light" ? t("a11y.dark") : t("a11y.light")}
     >
       <span className={cn(!ready && "opacity-0")}>
         {theme === "light" ? <MoonIcon /> : <SunIcon />}

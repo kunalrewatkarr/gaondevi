@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
 export function BackToTop() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export function BackToTop() {
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
       )}
-      aria-label="वर जा"
+      aria-label={t("a11y.backToTop")}
     >
       <span aria-hidden="true">↑</span>
     </button>

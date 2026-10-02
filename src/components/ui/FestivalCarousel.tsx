@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface Photo {
   src: string;
@@ -14,6 +15,7 @@ interface FestivalCarouselProps {
 }
 
 export function FestivalCarousel({ photos }: FestivalCarouselProps) {
+  const { t } = useTranslation();
   const [activeSlide, setActiveSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -81,7 +83,7 @@ export function FestivalCarousel({ photos }: FestivalCarouselProps) {
           type="button"
           onClick={prevSlide}
           className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-night/60 backdrop-blur-sm text-cream transition-all hover:bg-night/80 hover:scale-110 focus-ring-dark md:left-4"
-          aria-label="मागील फोटो"
+          aria-label={t("a11y.prevPhoto")}
         >
           <svg
             width="20"
@@ -100,7 +102,7 @@ export function FestivalCarousel({ photos }: FestivalCarouselProps) {
           type="button"
           onClick={nextSlide}
           className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-night/60 backdrop-blur-sm text-cream transition-all hover:bg-night/80 hover:scale-110 focus-ring-dark md:right-4"
-          aria-label="पुढील फोटो"
+          aria-label={t("a11y.nextPhoto")}
         >
           <svg
             width="20"
@@ -128,7 +130,7 @@ export function FestivalCarousel({ photos }: FestivalCarouselProps) {
                   ? "w-6 bg-saffron"
                   : "w-2 bg-cream/40 hover:bg-cream/60"
               }`}
-              aria-label={`फोटो ${index + 1}`}
+              aria-label={t("a11y.photoN", { n: index + 1 })}
             />
           ))}
         </div>

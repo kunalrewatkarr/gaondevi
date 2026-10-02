@@ -1,58 +1,45 @@
 import { existsSync, readdirSync, statSync } from "fs";
 import { join } from "path";
 import { IMAGE_EXTENSIONS, listPublicImages } from "@/lib/media";
-import { formatStatNumber } from "@/lib/numerals";
 
 export type GalleryCategory =
-  | "देवी दर्शन"
-  | "उत्सव"
-  | "सांस्कृतिक कार्यक्रम"
-  | "मंडप"
-  | "कार्यकर्ते"
-  | "सामाजिक उपक्रम";
+  | "darshan"
+  | "utsav"
+  | "sanskriti"
+  | "mandap"
+  | "karyakarte"
+  | "samaj";
 
 export interface GalleryImage {
   id: string;
   src: string;
   category: GalleryCategory;
-  alt: string;
+  /** Overrides gallery.alt.{category} when set */
+  altKey?: string;
+  altIndex: number;
+  altTotal: number;
 }
 
 export const galleryCategories: GalleryCategory[] = [
-  "देवी दर्शन",
-  "उत्सव",
-  "सांस्कृतिक कार्यक्रम",
-  "मंडप",
-  "कार्यकर्ते",
-  "सामाजिक उपक्रम",
+  "darshan",
+  "utsav",
+  "sanskriti",
+  "mandap",
+  "karyakarte",
+  "samaj",
 ];
 
 /** Folder name under public/images/gallery/ → category */
 export const galleryFolderMap: Record<string, GalleryCategory> = {
-  darshan: "देवी दर्शन",
-  utsav: "उत्सव",
-  sanskriti: "सांस्कृतिक कार्यक्रम",
-  mandap: "मंडप",
-  karyakarte: "कार्यकर्ते",
-  samaj: "सामाजिक उपक्रम",
+  darshan: "darshan",
+  utsav: "utsav",
+  sanskriti: "sanskriti",
+  mandap: "mandap",
+  karyakarte: "karyakarte",
+  samaj: "samaj",
 };
 
 const GALLERY_ROOT = join(process.cwd(), "public/images/gallery");
-
-const galleryAltByFolder: Record<string, string> = {
-  darshan: "श्री दुर्गा मातेचे दर्शन",
-  utsav: "नवरात्र उत्सवाचे दृश्य",
-  sanskriti: "सांस्कृतिक कार्यक्रमाचे क्षण",
-  mandap: "उत्सवाचा मंडप",
-  karyakarte: "मंडळाचे कार्यकर्ते",
-  samaj: "सामाजिक उपक्रम",
-};
-
-function galleryAlt(folder: string, category: string, index: number, total: number): string {
-  const label = galleryAltByFolder[folder] ?? category;
-  const count = total > 1 ? ` ${formatStatNumber(index + 1)}` : "";
-  return `${label}${count} — नवयुवक दुर्गा उत्सव मंडळ`;
-}
 
 function isImageFile(name: string): boolean {
   return IMAGE_EXTENSIONS.some((ext) => name.toLowerCase().endsWith(ext));
@@ -74,7 +61,8 @@ export function getGalleryImages(): GalleryImage[] {
         id: `${folder}-${index + 1}`,
         src,
         category,
-        alt: galleryAlt(folder, category, index, files.length),
+        altIndex: index + 1,
+        altTotal: files.length,
       });
     });
   }
@@ -91,7 +79,8 @@ export function getGalleryImages(): GalleryImage[] {
     .map((name, index) => ({
       id: `loose-${index + 1}`,
       src: `/images/gallery/${name}`,
-      category: "उत्सव" as const,
-      alt: galleryAlt("utsav", "उत्सव", index, loose.length),
+      category: "utsav" as const,
+      altIndex: index + 1,
+      altTotal: loose.length,
     }));
 }

@@ -1,3 +1,5 @@
+import { committeeMembers } from "@/data/committee";
+import { durgaImages, jyotImages, mandapImages } from "@/data/images";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -23,14 +25,14 @@ export default function Home() {
       <ScrollProgress />
       <Header />
       <main id="main-content" className="relative z-10" tabIndex={-1}>
-        <Hero />
+        <Hero heroSrc={durgaImages.hero} portraitSrc={durgaImages.main} />
         <MarqueeBanner />
-        <About />
-        <Committee />
+        <About imageSrc={durgaImages.main} jyotSrc={jyotImages.main} />
+        <Committee members={committeeMembers} />
         <SectionDivider />
-        <DurgaMaa />
+        <DurgaMaa imageSrc={durgaImages.secondary} />
         <Events />
-        <FestivalExperience />
+        <FestivalExperience images={mandapImages} />
         <Stats />
         <SocialWork />
         <Gallery />

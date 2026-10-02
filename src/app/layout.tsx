@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_Devanagari, Tiro_Devanagari_Marathi } from "next/font/google";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { SkipLink } from "@/components/ui/SkipLink";
 import { logoImage } from "@/data/branding";
 import { contactInfo, socialLinks } from "@/data/contact";
 import { siteConfig } from "@/data/site";
@@ -8,7 +10,7 @@ import "./globals.css";
 
 const notoDevanagari = Noto_Sans_Devanagari({
   variable: "--font-noto-devanagari",
-  subsets: ["devanagari"],
+  subsets: ["devanagari", "latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
@@ -124,12 +126,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body
         className={`${notoDevanagari.className} min-h-full flex flex-col bg-ivory text-ink`}
       >
-        <a href="#main-content" className="skip-link">
-          मुख्य मजकुराकडे जा
-        </a>
-        <div className="grain" aria-hidden="true" />
-        {children}
-        <Analytics />
+        <LanguageProvider>
+          <SkipLink />
+          <div className="grain" aria-hidden="true" />
+          {children}
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   );

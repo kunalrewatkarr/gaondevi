@@ -1,11 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import { aboutContent, siteConfig } from "@/data/site";
-import { durgaImages, jyotImages } from "@/data/images";
+import { useTranslation } from "@/context/LanguageContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Card } from "@/components/ui/Card";
 
-function ValueIcon({ title }: { title: string }) {
+const VALUE_IDS = ["bhakti", "sanskriti", "seva", "youth", "unity"] as const;
+
+function ValueIcon({ id }: { id: string }) {
   const common = {
     viewBox: "0 0 24 24",
     className: "h-6 w-6 text-gold-ink",
@@ -17,7 +20,7 @@ function ValueIcon({ title }: { title: string }) {
     "aria-hidden": true as const,
   };
 
-  if (title === "भक्ती") {
+  if (id === "bhakti") {
     return (
       <svg {...common}>
         <path d="M12 3c.6 2.2-.2 3.6-1.4 4.6 2 .4 3.4 1.6 3.4 3.4 0 .4-.1.7-.2 1 2.2.7 3.7 2.2 3.7 4.2 0 2.6-2.6 4.8-5.5 4.8S6.5 18.8 6.5 16.2c0-2 1.5-3.5 3.7-4.2-.1-.3-.2-.6-.2-1 0-1.4 1-2.4 2.2-3C10.8 6.6 10.4 5 12 3z" />
@@ -25,7 +28,7 @@ function ValueIcon({ title }: { title: string }) {
     );
   }
 
-  if (title === "संस्कृती") {
+  if (id === "sanskriti") {
     return (
       <svg {...common}>
         <path d="M4 10h16" />
@@ -38,7 +41,7 @@ function ValueIcon({ title }: { title: string }) {
     );
   }
 
-  if (title === "सामाजिक बांधिलकी") {
+  if (id === "seva") {
     return (
       <svg {...common}>
         <path d="M12 20s-6.5-4.1-6.5-8.2A3.6 3.6 0 0 1 12 9.2a3.6 3.6 0 0 1 6.5 2.6C18.5 15.9 12 20 12 20z" />
@@ -48,7 +51,7 @@ function ValueIcon({ title }: { title: string }) {
     );
   }
 
-  if (title === "युवक सहभाग") {
+  if (id === "youth") {
     return (
       <svg {...common}>
         <path d="M12 3.5l1.6 3.8 4.1.4-3.1 2.7.9 4-3.5-2.1-3.5 2.1.9-4L5.3 7.7l4.1-.4z" />
@@ -67,14 +70,21 @@ function ValueIcon({ title }: { title: string }) {
   );
 }
 
-export function About() {
+interface AboutProps {
+  imageSrc: string;
+  jyotSrc: string;
+}
+
+export function About({ imageSrc, jyotSrc }: AboutProps) {
+  const { t } = useTranslation();
+
   return (
     <section id="about" className="section-padding about-surface relative overflow-x-clip">
       <div className="container-main relative z-10">
         <SectionHeading
-          kicker="परंपरा"
-          title={aboutContent.heading}
-          subtitle={aboutContent.subheading}
+          kicker={t("about.kicker")}
+          title={t("about.heading")}
+          subtitle={t("site.name")}
         />
 
         <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-16">
@@ -86,8 +96,8 @@ export function About() {
               />
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-ink/5 shadow-2xl shadow-ink/15">
                 <Image
-                  src={durgaImages.main}
-                  alt="श्री दुर्गा मातेची मूर्ती — नवयुवक दुर्गा उत्सव मंडळ"
+                  src={imageSrc}
+                  alt={t("about.imageAlt")}
                   fill
                   sizes="(max-width: 1024px) 90vw, 40vw"
                   loading="eager"
@@ -100,11 +110,11 @@ export function About() {
           <FadeIn delay={120} className="lg:col-span-7">
             <div className="space-y-5 text-base leading-relaxed text-ink-muted sm:text-lg">
               <p className="font-display text-xl text-gold-ink sm:text-2xl">
-                {siteConfig.honorific}
+                {t("site.honorific")}
               </p>
-              <p className="text-ink">{aboutContent.intro}</p>
-              <p>{aboutContent.history}</p>
-              <p>{aboutContent.mission}</p>
+              <p className="text-ink">{t("about.intro")}</p>
+              <p>{t("about.history")}</p>
+              <p>{t("about.mission")}</p>
             </div>
           </FadeIn>
         </div>
@@ -114,8 +124,8 @@ export function About() {
             <div className="grid items-stretch md:grid-cols-2">
               <div className="relative min-h-[280px] aspect-[3/4] shadow-[inset_0_0_48px_rgba(201,150,44,0.35)] ring-2 ring-gold/70 md:aspect-auto md:min-h-[360px]">
                 <Image
-                  src={jyotImages.main}
-                  alt="अखंड मनोकामना ज्योत व घटस्थापना — नवयुवक दुर्गा उत्सव मंडळ"
+                  src={jyotSrc}
+                  alt={t("about.jyotImageAlt")}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover object-center"
@@ -124,21 +134,21 @@ export function About() {
               </div>
               <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10">
                 <p className="text-xs font-semibold text-gold-ink">
-                  परंपरा
+                  {t("about.kicker")}
                 </p>
                 <h3 className="mt-3 font-display text-2xl text-ink sm:text-3xl">
-                  अखंड मनोकामना ज्योत
+                  {t("about.jyotTitle")}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-ink-muted">
-                  {aboutContent.jyotInfo}
+                  {t("about.jyotInfo")}
                 </p>
                 <p className="mt-5 text-sm font-semibold text-gold-ink">
-                  नवरात्र २०२६ — ज्योत श्री रेणुकादेवी मंदिर, माहुरगड, नांदेड येथून
+                  {t("about.jyotSource")}
                 </p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                   {[
-                    ["९ दिवस ९ रात्र", "अखंड ज्योत"],
-                    ["₹८०१", "संकल्प राशी"],
+                    [t("about.jyotDuration"), t("about.jyotDurationLabel")],
+                    [t("about.jyotAmount"), t("about.jyotAmountLabel")],
                   ].map(([value, label]) => (
                     <li
                       key={label}
@@ -149,9 +159,9 @@ export function About() {
                     </li>
                   ))}
                   <li className="rounded-2xl bg-gold/15 px-3 py-2 ring-1 ring-gold/35 sm:col-span-2">
-                    <p className="text-xs text-ink-muted">आरतीची वेळ</p>
+                    <p className="text-xs text-ink-muted">{t("about.aartiTimeLabel")}</p>
                     <p className="mt-1 font-display text-lg leading-snug text-gold-ink">
-                      सकाळी ८:०५ व सायंकाळी ८:०५
+                      {t("about.aartiTime")}
                     </p>
                   </li>
                 </ul>
@@ -161,17 +171,17 @@ export function About() {
         </FadeIn>
 
         <div className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {aboutContent.values.map((value, i) => (
-            <FadeIn key={value.title} delay={i * 70}>
+          {VALUE_IDS.map((id, i) => (
+            <FadeIn key={id} delay={i * 70}>
               <Card lift className="h-full p-5 sm:p-6">
                 <span className="icon-badge" aria-hidden="true">
-                  <ValueIcon title={value.title} />
+                  <ValueIcon id={id} />
                 </span>
                 <h3 className="mt-3 font-display text-xl leading-snug text-ink sm:text-2xl">
-                  {value.title}
+                  {t(`about.values.${id}.title`)}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  {value.description}
+                  {t(`about.values.${id}.description`)}
                 </p>
               </Card>
             </FadeIn>

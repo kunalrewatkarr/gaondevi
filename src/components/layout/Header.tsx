@@ -3,11 +3,14 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { mobileNavigation, navigation } from "@/data/site";
+import { useTranslation } from "@/context/LanguageContext";
 import { Logo } from "@/components/ui/Logo";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 export function Header() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
@@ -130,7 +133,7 @@ export function Header() {
             labelClassName={cn(
               "hidden min-w-0 md:block",
               onDark ? "text-cream" : "text-ink",
-              "[&_p:first-child]:max-w-[11rem] [&_p:first-child]:leading-snug xl:[&_p:first-child]:max-w-none",
+              "[&_p:first-child]:max-w-[18rem] [&_p:first-child]:leading-snug xl:[&_p:first-child]:max-w-[14rem] 2xl:[&_p:first-child]:max-w-none",
               "[&_p:last-child]:text-xs",
               onDark
                 ? "[&_p:last-child]:text-rose-gold"
@@ -141,7 +144,7 @@ export function Header() {
 
         <nav
           className="hidden items-center gap-0.5 xl:flex"
-          aria-label="मुख्य नेव्हिगेशन"
+          aria-label={t("a11y.mainNav")}
         >
           {navigation.map((item) => {
             const isActive = activeSection === item.href;
@@ -160,7 +163,7 @@ export function Header() {
                       : "text-ink-muted hover:bg-gold/10 hover:text-gold-ink")
                 )}
               >
-                {item.label}
+                {t(item.labelKey)}
                 {isActive && (
                   <span
                     className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-gold to-gold-bright"
@@ -170,7 +173,8 @@ export function Header() {
               </Link>
             );
           })}
-          <ThemeToggle onDark={onDark} className="ml-1" />
+          <LanguageSwitcher onDark={onDark} className="ml-1 shrink-0" />
+          <ThemeToggle onDark={onDark} />
         </nav>
 
         <div className="flex items-center gap-1 xl:hidden">
@@ -184,7 +188,7 @@ export function Header() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls={menuId}
-            aria-label={menuOpen ? "मेनू बंद करा" : "मेनू उघडा"}
+            aria-label={menuOpen ? t("a11y.closeMenu") : t("a11y.openMenu")}
           >
             <span className="text-2xl" aria-hidden="true">
               {menuOpen ? "✕" : "☰"}
@@ -200,7 +204,7 @@ export function Header() {
         ref={menuPanelRef}
         role="dialog"
         aria-modal="true"
-        aria-label="मेनू"
+        aria-label={t("a11y.menu")}
         inert={!menuOpen}
         className={cn(
           "fixed inset-0 z-[70] overflow-x-hidden bg-ivory xl:hidden",
@@ -211,8 +215,11 @@ export function Header() {
       >
         <nav
           className="h-full overflow-y-auto overscroll-contain pt-[4.75rem] pb-[max(1.25rem,env(safe-area-inset-bottom))]"
-          aria-label="मोबाइल नेव्हिगेशन"
+          aria-label={t("a11y.mobileNav")}
         >
+          <div className="border-b border-ink/10 px-5 py-4 sm:px-8">
+            <LanguageSwitcher variant="pills" />
+          </div>
           <ul className="flex flex-col">
             {mobileNavigation.map((item) => {
               const isActive = activeSection === item.href;
@@ -232,7 +239,7 @@ export function Header() {
                         : "text-ink hover:bg-gold/10 hover:text-gold-ink"
                     )}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </Link>
                 </li>
               );
