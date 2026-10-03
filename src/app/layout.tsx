@@ -3,10 +3,47 @@ import { Noto_Sans_Devanagari, Tiro_Devanagari_Marathi } from "next/font/google"
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { logoImage } from "@/data/branding";
-import { contactInfo, socialLinks } from "@/data/contact";
 import { siteConfig } from "@/data/site";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+
+const siteUrl = "https://gaondevi.vercel.app";
+
+const siteDescription =
+  "Navyuvak Durga Utsav Mandal (नवयुवक दुर्गा उत्सव मंडळ), also written Navyuwak Durga Utsav Mandal, established 1980 at Shri Shiv Mandir Maruti Devasthan, Zingabai Takli, Zenda Chowk, Nagpur. Daily aarti, a nine-day Navratri festival, cultural events, photos and updates for devotees from Gaondevi and Godhani.";
+
+function jsonLd(data: object) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Navyuvak Durga Utsav Mandal",
+  alternateName: [
+    "नवयुवक दुर्गा उत्सव मंडळ",
+    "Navyuwak Durga Utsav Mandal",
+    "Navuvak Durga Utsav Madal",
+  ],
+  url: siteUrl,
+  foundingDate: "1980",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Shri Shiv Mandir Maruti Devasthan, Zingabai Takli, Zenda Chowk",
+    addressLocality: "Nagpur",
+    addressRegion: "Maharashtra",
+    addressCountry: "IN",
+  },
+  areaServed: ["Gaondevi", "Zingabai Takli", "Godhani", "Nagpur"],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Navyuvak Durga Utsav Mandal",
+  alternateName: ["Navyuwak Durga Utsav Mandal"],
+  url: siteUrl,
+};
 
 const notoDevanagari = Noto_Sans_Devanagari({
   variable: "--font-noto-devanagari",
@@ -30,49 +67,52 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "नवयुवक दुर्गा उत्सव मंडळ | नवरात्र उत्सव २०२६ | झिंगाबाई टाकळी",
-  description:
-    "नवयुवक दुर्गा उत्सव मंडळ, श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर — नवरात्र उत्सव २०२६, श्री दुर्गा माता दर्शन, कार्यक्रम आणि सामाजिक उपक्रम. झिंगाबाई टाकळीची आई (गावदेवीचा मान प्राप्त).",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Navyuvak Durga Utsav Mandal | Gaondevi, Zingabai Takli, Nagpur",
+    template: "%s | Navyuvak Durga Utsav Mandal",
+  },
+  description: siteDescription,
   keywords: [
+    "Navyuvak Durga Utsav Mandal",
+    "Navyuwak Durga Utsav Mandal",
+    "Navuvak Durga Utsav Madal",
     "नवयुवक दुर्गा उत्सव मंडळ",
-    "नवरात्र उत्सव २०२६",
+    "Gaondevi Nagpur",
+    "Zingabai Takli Nagpur",
+    "Godhani Nagpur",
+    "Shri Shiv Mandir Maruti Devasthan Nagpur",
     "झिंगाबाई टाकळी",
-    "झेंडा चौक",
-    "नागपूर",
-    "दुर्गा माता",
-    "Durga Utsav Nagpur",
-    "Navratri Nagpur",
+    "गोधनी",
   ],
   authors: [{ name: siteConfig.name }],
   openGraph: {
-    title: "नवयुवक दुर्गा उत्सव मंडळ | नवरात्र उत्सव २०२६",
-    description:
-      "श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर — नवरात्र उत्सव २०२६, दर्शन, कार्यक्रम आणि सामाजिक उपक्रम.",
+    title: "Navyuvak Durga Utsav Mandal",
+    description: siteDescription,
     locale: "mr_IN",
     type: "website",
-    siteName: siteConfig.name,
-    url: siteConfig.url,
+    siteName: "Navyuvak Durga Utsav Mandal",
+    url: siteUrl,
     images: [
       {
-        url: `${siteConfig.url}${logoImage}`,
+        url: logoImage,
         width: 512,
         height: 512,
-        alt: siteConfig.name,
+        alt: "Navyuvak Durga Utsav Mandal, Zingabai Takli",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "नवयुवक दुर्गा उत्सव मंडळ | नवरात्र उत्सव २०२६",
-    description:
-      "श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर येथे भव्य नवरात्र उत्सव २०२६.",
+    title: "Navyuvak Durga Utsav Mandal",
+    description: siteDescription,
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: siteConfig.url,
+    canonical: "/",
   },
   icons: {
     icon: [
@@ -97,30 +137,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: `(function(){try{var k='gaondevi-theme';var t=localStorage.getItem(k);if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t;}catch(e){}})();`,
           }}
         />
+        {/* TODO: Confirm official Instagram and YouTube URLs, then add Organization.sameAs. */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: siteConfig.name,
-              url: siteConfig.url,
-              foundingDate: String(siteConfig.foundedYear),
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Nagpur",
-                addressRegion: "Maharashtra",
-                addressCountry: "IN",
-                streetAddress: siteConfig.venue,
-              },
-              telephone: `+91${contactInfo.phone}`,
-              sameAs: [
-                socialLinks.instagram,
-                socialLinks.facebook,
-                socialLinks.youtube,
-              ].filter(Boolean),
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd) }}
         />
       </head>
       <body

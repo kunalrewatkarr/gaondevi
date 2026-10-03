@@ -30,7 +30,7 @@ export function DurgaMaa({ imageSrc }: { imageSrc: string }) {
               <div className="relative aspect-square overflow-hidden rounded-full border-4 border-gold/40 shadow-2xl shadow-night/40">
                 <Image
                   src={imageSrc}
-                  alt={t("durga.name")}
+                  alt={t("imageAlt.durga")}
                   fill
                   sizes="(max-width: 1024px) 90vw, 45vw"
                   className="object-cover object-[center_12%]"

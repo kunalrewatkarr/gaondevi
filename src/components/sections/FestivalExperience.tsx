@@ -25,7 +25,7 @@ export function FestivalExperience({ images }: { images: FestivalImages }) {
   } as const;
   const photos = PHOTO_IDS.map((id) => ({
     src: photoSources[id],
-    alt: t(`experience.photos.${id}.alt`),
+    alt: t(`imageAlt.experience.${id}`),
     caption: t(`experience.photos.${id}.caption`),
   }));
   return (

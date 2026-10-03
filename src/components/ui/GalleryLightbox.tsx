@@ -20,7 +20,7 @@ function galleryImageAlt(
   const numerals = language === "en" ? "latin" : "devanagari";
   const count =
     image.altTotal > 1 ? ` ${formatStatNumber(image.altIndex, numerals)}` : "";
-  return `${label}${count} — ${t("site.name")}`;
+  return `${label}${count} — ${t("imageAlt.galleryCredit")}`;
 }
 
 const PAGE_SIZE = 12;

@@ -46,7 +46,7 @@ export function Logo({
       >
         <Image
           src={logoImage}
-          alt={t("logo.alt", { name })}
+          alt={t("imageAlt.logo")}
           width={s.img}
           height={s.img}
           className="h-full w-full object-cover [image-rendering:-webkit-optimize-contrast]"

@@ -161,7 +161,7 @@ export function Donation() {
                   <div className="rounded-full bg-white p-1.5 shadow-lg">
                     <Image
                       src="/images/logo/mandal-logo.png"
-                      alt={t("donation.logoAlt")}
+                      alt={t("imageAlt.donationLogo")}
                       width={37}
                       height={37}
                       className="rounded-full"

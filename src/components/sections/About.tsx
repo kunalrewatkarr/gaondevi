@@ -97,7 +97,7 @@ export function About({ imageSrc, jyotSrc }: AboutProps) {
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-ink/5 shadow-2xl shadow-ink/15">
                 <Image
                   src={imageSrc}
-                  alt={t("about.imageAlt")}
+                  alt={t("imageAlt.about")}
                   fill
                   sizes="(max-width: 1024px) 90vw, 40vw"
                   loading="eager"
@@ -125,7 +125,7 @@ export function About({ imageSrc, jyotSrc }: AboutProps) {
               <div className="relative min-h-[280px] aspect-[3/4] shadow-[inset_0_0_48px_rgba(201,150,44,0.35)] ring-2 ring-gold/70 md:aspect-auto md:min-h-[360px]">
                 <Image
                   src={jyotSrc}
-                  alt={t("about.jyotImageAlt")}
+                  alt={t("imageAlt.jyot")}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover object-center"

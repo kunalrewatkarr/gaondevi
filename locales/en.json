@@ -313,7 +313,8 @@
     "message": "Message",
     "messagePlaceholder": "Your message...",
     "submit": "Send message on WhatsApp",
-    "whatsappHeader": "Website contact form"
+    "whatsappHeader": "Website contact form",
+    "areaNote": "Navyuvak Durga Utsav Mandal (also written Navyuwak Durga Utsav Mandal) is at Shri Shiv Mandir Maruti Devasthan, Zingabai Takli, Zenda Chowk, Nagpur, and devotees come from Godhani and nearby areas."
   },
   "donation": {
     "kicker": "Donate",
@@ -347,5 +348,21 @@
     "source": "Flame source: will be brought from Shri Renuka Devi Mandir, Mahurgad, Nanded.",
     "contact": "Contact: For ghat booking, contact 7769886682.",
     "deadline": "Last date to register: 5 October 2026"
+  },
+  "imageAlt": {
+    "hero": "Shri Durga Mata at Navyuvak Durga Utsav Mandal, Zingabai Takli",
+    "murti": "Murti of Shri Durga Mata at Navyuvak Durga Utsav Mandal, Gaondevi, Zingabai Takli",
+    "about": "Murti of Shri Durga Mata at Navyuvak Durga Utsav Mandal, Zingabai Takli",
+    "jyot": "Akhand Manokamna Jyot at Navyuvak Durga Utsav Mandal, Zingabai Takli",
+    "durga": "Shri Durga Mata at Navyuvak Durga Utsav Mandal, Gaondevi, Zingabai Takli",
+    "logo": "Logo of Navyuvak Durga Utsav Mandal, Zingabai Takli",
+    "donationLogo": "Logo of Navyuvak Durga Utsav Mandal, Zingabai Takli",
+    "galleryCredit": "Navyuvak Durga Utsav Mandal, Zingabai Takli",
+    "experience": {
+      "mandap": "Festival mandap of Navyuvak Durga Utsav Mandal, Zingabai Takli",
+      "decor": "Mandap decoration at Navyuvak Durga Utsav Mandal, Gaondevi",
+      "darshan": "Navratri darshan at Navyuvak Durga Utsav Mandal, Zingabai Takli",
+      "utsav": "Navratri festival at Navyuvak Durga Utsav Mandal, Zingabai Takli"
+    }
   }
 }

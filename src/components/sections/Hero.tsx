@@ -21,7 +21,7 @@ export function Hero({ heroSrc, portraitSrc }: HeroProps) {
       <div className="absolute inset-0 overflow-hidden">
         <Image
           src={heroSrc}
-          alt={t("hero.portraitAlt")}
+          alt={t("imageAlt.hero")}
           fill
           priority
           sizes="100vw"
@@ -88,7 +88,7 @@ export function Hero({ heroSrc, portraitSrc }: HeroProps) {
               <div className="relative aspect-[3/4] w-56 overflow-hidden rounded-[2rem] border-2 border-gold/50 shadow-2xl shadow-night/50 ring-4 ring-gold/20 sm:w-64 lg:w-72">
                 <Image
                   src={portraitSrc}
-                  alt={t("hero.murtiAlt")}
+                  alt={t("imageAlt.murti")}
                   fill
                   sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 288px"
                   priority
