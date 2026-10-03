@@ -90,11 +90,6 @@ export function Contact() {
                   <p>{t("contact.line1")}</p>
                   <p>{t("contact.line2")}</p>
                 </div>
-                {/* TODO: Add extra nearby areas the mandal serves, besides Godhani. */}
-                {/* TODO: Do not add copy about "Zingabai Takli chi Aai" until you write it. */}
-                <p className="mt-4 text-base leading-[1.85] text-ink">
-                  {t("contact.areaNote")}
-                </p>
               </Card>
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">

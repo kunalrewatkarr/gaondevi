@@ -9,8 +9,10 @@ import "./globals.css";
 
 const siteUrl = "https://gaondevi.vercel.app";
 
+const siteTitle = "नवयुवक दुर्गा उत्सव मंडळ | झिंगाबाई टाकळी";
+
 const siteDescription =
-  "Navyuvak Durga Utsav Mandal (नवयुवक दुर्गा उत्सव मंडळ), also written Navyuwak Durga Utsav Mandal, established 1980 at Shri Shiv Mandir Maruti Devasthan, Zingabai Takli, Zenda Chowk, Nagpur. Daily aarti, a nine-day Navratri festival, cultural events, photos and updates for devotees from Gaondevi and Godhani.";
+  "नवयुवक दुर्गा उत्सव मंडळ, श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर — नवरात्र उत्सव २०२६, श्री दुर्गा माता दर्शन, कार्यक्रम आणि सामाजिक उपक्रम. झिंगाबाई टाकळीची आई (गावदेवीचा मान प्राप्त).";
 
 function jsonLd(data: object) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
@@ -19,9 +21,9 @@ function jsonLd(data: object) {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Navyuvak Durga Utsav Mandal",
+  name: "नवयुवक दुर्गा उत्सव मंडळ",
   alternateName: [
-    "नवयुवक दुर्गा उत्सव मंडळ",
+    "Navyuvak Durga Utsav Mandal",
     "Navyuwak Durga Utsav Mandal",
     "Navuvak Durga Utsav Madal",
   ],
@@ -40,8 +42,8 @@ const organizationJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Navyuvak Durga Utsav Mandal",
-  alternateName: ["Navyuwak Durga Utsav Mandal"],
+  name: "नवयुवक दुर्गा उत्सव मंडळ",
+  alternateName: ["Navyuvak Durga Utsav Mandal", "Navyuwak Durga Utsav Mandal"],
   url: siteUrl,
 };
 
@@ -69,8 +71,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Navyuvak Durga Utsav Mandal | Gaondevi, Zingabai Takli, Nagpur",
-    template: "%s | Navyuvak Durga Utsav Mandal",
+    default: siteTitle,
+    template: "%s | नवयुवक दुर्गा उत्सव मंडळ",
   },
   description: siteDescription,
   keywords: [
@@ -87,25 +89,27 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: siteConfig.name }],
   openGraph: {
-    title: "Navyuvak Durga Utsav Mandal",
-    description: siteDescription,
+    title: "नवयुवक दुर्गा उत्सव मंडळ | नवरात्र उत्सव २०२६",
+    description:
+      "श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर — नवरात्र उत्सव २०२६, दर्शन, कार्यक्रम आणि सामाजिक उपक्रम.",
     locale: "mr_IN",
     type: "website",
-    siteName: "Navyuvak Durga Utsav Mandal",
+    siteName: siteConfig.name,
     url: siteUrl,
     images: [
       {
         url: logoImage,
         width: 512,
         height: 512,
-        alt: "Navyuvak Durga Utsav Mandal, Zingabai Takli",
+        alt: siteConfig.name,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Navyuvak Durga Utsav Mandal",
-    description: siteDescription,
+    title: "नवयुवक दुर्गा उत्सव मंडळ | नवरात्र उत्सव २०२६",
+    description:
+      "श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर येथे भव्य नवरात्र उत्सव २०२६.",
   },
   robots: {
     index: true,
