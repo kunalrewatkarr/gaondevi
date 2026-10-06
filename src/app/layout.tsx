@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const siteUrl = "https://gaondevi.vercel.app";
+const siteUrl = "https://zingabaitaklichiaai.vercel.app";
 
 const siteTitle = "नवयुवक दुर्गा उत्सव मंडळ | झिंगाबाई टाकळी";
 

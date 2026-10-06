@@ -6,7 +6,7 @@ export const siteConfig = {
   tagline: "भक्ती, संस्कृती आणि एकतेचा उत्सव",
   welcomeMessage: "नवरात्र उत्सवाच्या पावन पर्वात आपले हार्दिक स्वागत",
   foundedYear: 1980,
-  url: "https://gaondevi.vercel.app",
+  url: "https://zingabaitaklichiaai.vercel.app",
   venue: "श्री शिवमंदिर मारुती देवस्थान, झिंगाबाई टाकळी, झेंडा चौक, नागपूर",
   programmeYear: "२०२६",
 } as const;
