@@ -10,7 +10,8 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 export function Header() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const english = language === "en";
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
@@ -116,7 +117,7 @@ export function Header() {
             : "bg-transparent py-3"
         )}
       >
-      <div className="container-main flex items-center justify-between gap-4">
+      <div className="mx-auto flex w-full max-w-[90rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <Link
           href="#home"
           className="group rounded-lg focus-ring"
@@ -131,10 +132,13 @@ export function Header() {
             variant={onDark ? "light" : "dark"}
             className="transition-transform group-hover:scale-[1.02] sm:[&>div:first-child]:h-14 sm:[&>div:first-child]:w-14"
             labelClassName={cn(
-              "hidden min-w-0 md:block",
+              "hidden min-w-0 shrink-0 md:block",
               onDark ? "text-cream" : "text-ink",
-              "[&_p:first-child]:max-w-[18rem] [&_p:first-child]:leading-snug xl:[&_p:first-child]:max-w-[14rem] 2xl:[&_p:first-child]:max-w-none",
+              english
+                ? "[&_p:first-child]:max-w-none [&_p:first-child]:text-[15px] [&_p:first-child]:leading-[1.15] xl:[&_p:first-child]:max-w-none 2xl:[&_p:first-child]:text-base"
+                : "[&_p:first-child]:max-w-[18rem] [&_p:first-child]:leading-snug xl:[&_p:first-child]:max-w-[14rem] 2xl:[&_p:first-child]:max-w-none",
               "[&_p:last-child]:text-xs",
+              english && "[&_p:last-child]:whitespace-nowrap [&_p:last-child]:text-[11px]",
               onDark
                 ? "[&_p:last-child]:text-rose-gold"
                 : "[&_p:last-child]:text-gold-ink"
@@ -143,7 +147,7 @@ export function Header() {
         </Link>
 
         <nav
-          className="hidden items-center gap-0.5 xl:flex"
+          className="hidden min-w-0 items-center gap-0.5 xl:flex"
           aria-label={t("a11y.mainNav")}
         >
           {navigation.map((item) => {
@@ -154,7 +158,10 @@ export function Header() {
                 href={item.href}
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "relative rounded-full px-2.5 py-2 text-sm font-medium transition-all duration-300 focus-ring xl:px-3",
+                  "relative rounded-full py-2 font-medium transition-all duration-300 focus-ring",
+                  english
+                    ? "whitespace-nowrap px-2 text-[13px] leading-none xl:px-2.5 2xl:px-3 2xl:text-sm"
+                    : "px-2.5 text-sm xl:px-3",
                   isActive && !onDark && "bg-gold/15 text-gold-ink",
                   isActive && onDark && "bg-gold/20 text-gold-bright",
                   !isActive &&

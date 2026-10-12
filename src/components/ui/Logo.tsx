@@ -31,6 +31,12 @@ export function Logo({
   const { t } = useTranslation();
   const s = sizes[size];
   const name = t("site.name");
+  const headerName = t("site.headerName");
+  const headerLocation = t("site.headerLocation");
+  const nameLines =
+    headerName !== "site.headerName" ? headerName.split("\n").filter(Boolean) : [];
+  const location =
+    headerLocation !== "site.headerLocation" ? headerLocation : t("site.location");
 
   return (
     <div className={cn("flex items-center gap-3", className)}>
@@ -58,9 +64,15 @@ export function Logo({
       {showLabel && (
         <div className={labelClassName}>
           <p className="font-display text-base leading-tight md:text-lg">
-            {name}
+            {nameLines.length > 1
+              ? nameLines.map((line) => (
+                  <span key={line} className="block whitespace-nowrap">
+                    {line}
+                  </span>
+                ))
+              : name}
           </p>
-          <p className="text-xs text-gold-ink">{t("site.location")}</p>
+          <p className="text-xs text-gold-ink">{location}</p>
         </div>
       )}
     </div>
