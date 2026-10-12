@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import type { GalleryImage } from "@/data/gallery";
+import { galleryCategories, type GalleryImage } from "@/data/gallery-categories";
 import { useTranslation, type Language } from "@/context/LanguageContext";
 import { formatStatNumber } from "@/lib/numerals";
 import { Button } from "@/components/ui/Button";
@@ -241,10 +241,10 @@ export function GalleryGrid({ images }: GalleryGridProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  const categories = useMemo(
-    () => [ALL, ...new Set(images.map((i) => i.category))],
-    [images]
-  );
+  const categories = useMemo(() => {
+    const present = new Set(images.map((i) => i.category));
+    return [ALL, ...galleryCategories.filter((cat) => present.has(cat))];
+  }, [images]);
 
   const filtered = useMemo(
     () =>

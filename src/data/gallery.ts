@@ -1,36 +1,18 @@
 import { existsSync, readdirSync, statSync } from "fs";
 import { join } from "path";
 import { IMAGE_EXTENSIONS, listPublicImages } from "@/lib/media";
+import {
+  galleryCategories,
+  type GalleryCategory,
+  type GalleryImage,
+} from "@/data/gallery-categories";
 
-export type GalleryCategory =
-  | "darshan"
-  | "utsav"
-  | "sanskriti"
-  | "mandap"
-  | "karyakarte"
-  | "samaj";
-
-export interface GalleryImage {
-  id: string;
-  src: string;
-  category: GalleryCategory;
-  /** Overrides gallery.alt.{category} when set */
-  altKey?: string;
-  altIndex: number;
-  altTotal: number;
-}
-
-export const galleryCategories: GalleryCategory[] = [
-  "darshan",
-  "utsav",
-  "sanskriti",
-  "mandap",
-  "karyakarte",
-  "samaj",
-];
+export type { GalleryCategory, GalleryImage };
+export { galleryCategories };
 
 /** Folder name under public/images/gallery/ → category */
 export const galleryFolderMap: Record<string, GalleryCategory> = {
+  "navratri-2026": "navratri2026",
   darshan: "darshan",
   utsav: "utsav",
   sanskriti: "sanskriti",
